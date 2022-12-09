@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		CC34637629432CD700E07172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637529432CD700E07172 /* AppDelegate.swift */; };
 		CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637729432CD700E07172 /* SceneDelegate.swift */; };
-		CC34637A29432CD700E07172 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637929432CD700E07172 /* ViewController.swift */; };
-		CC34637D29432CD700E07172 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC34637B29432CD700E07172 /* Main.storyboard */; };
 		CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC34637E29432CD700E07172 /* PlantManager.xcdatamodeld */; };
 		CC34638229432CD800E07172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC34638129432CD800E07172 /* Assets.xcassets */; };
 		CC34638529432CD800E07172 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC34638329432CD800E07172 /* LaunchScreen.storyboard */; };
+		CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34638F29433BAE00E07172 /* RemindersViewController.swift */; };
+		CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */; };
+		CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639529433C4300E07172 /* DiscoverViewController.swift */; };
+		CC34639A2943429900E07172 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3463992943429900E07172 /* TabBarController.swift */; };
+		CC34639C29435EE900E07172 /* PlantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639B29435EE900E07172 /* PlantType.swift */; };
+		CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CC34637229432CD700E07172 /* PlantManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC34637529432CD700E07172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC34637729432CD700E07172 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CC34637929432CD700E07172 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CC34637C29432CD700E07172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CC34637F29432CD700E07172 /* PlantManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlantManager.xcdatamodel; sourceTree = "<group>"; };
 		CC34638129432CD800E07172 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC34638429432CD800E07172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC34638629432CD800E07172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC34638F29433BAE00E07172 /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
+		CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCollectionViewController.swift; sourceTree = "<group>"; };
+		CC34639529433C4300E07172 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
+		CC3463992943429900E07172 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CC34639B29435EE900E07172 /* PlantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantType.swift; sourceTree = "<group>"; };
+		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +66,44 @@
 		CC34637429432CD700E07172 /* PlantManager */ = {
 			isa = PBXGroup;
 			children = (
+				CC34638E2943391300E07172 /* Controller */,
+				CC34638D2943390B00E07172 /* Model */,
+				CC34638C294338FE00E07172 /* VIew */,
 				CC34637529432CD700E07172 /* AppDelegate.swift */,
+				CC3463992943429900E07172 /* TabBarController.swift */,
 				CC34637729432CD700E07172 /* SceneDelegate.swift */,
-				CC34637929432CD700E07172 /* ViewController.swift */,
-				CC34637B29432CD700E07172 /* Main.storyboard */,
 				CC34638129432CD800E07172 /* Assets.xcassets */,
 				CC34638329432CD800E07172 /* LaunchScreen.storyboard */,
 				CC34638629432CD800E07172 /* Info.plist */,
 				CC34637E29432CD700E07172 /* PlantManager.xcdatamodeld */,
 			);
 			path = PlantManager;
+			sourceTree = "<group>";
+		};
+		CC34638C294338FE00E07172 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				CC34638F29433BAE00E07172 /* RemindersViewController.swift */,
+				CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */,
+				CC34639529433C4300E07172 /* DiscoverViewController.swift */,
+				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		CC34638D2943390B00E07172 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC34639B29435EE900E07172 /* PlantType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CC34638E2943391300E07172 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +166,6 @@
 			files = (
 				CC34638529432CD800E07172 /* LaunchScreen.storyboard in Resources */,
 				CC34638229432CD800E07172 /* Assets.xcassets in Resources */,
-				CC34637D29432CD700E07172 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,24 +176,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC34637A29432CD700E07172 /* ViewController.swift in Sources */,
+				CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */,
+				CC34639A2943429900E07172 /* TabBarController.swift in Sources */,
+				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
+				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
+				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
+				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CC34637B29432CD700E07172 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CC34637C29432CD700E07172 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CC34638329432CD800E07172 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,9 +327,10 @@
 				INFOPLIST_FILE = PlantManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +338,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.exp.PlantManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -322,9 +358,10 @@
 				INFOPLIST_FILE = PlantManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,6 +369,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.exp.PlantManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

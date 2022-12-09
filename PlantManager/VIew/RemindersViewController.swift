@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RemindersViewController.swift
 //  PlantManager
 //
 //  Created by Elizaveta Shelemekh on 09.12.2022.
@@ -7,13 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class RemindersViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.navigationItem.title = "Reminders"
     }
-
-
 }
-
