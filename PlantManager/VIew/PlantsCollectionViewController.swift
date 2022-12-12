@@ -10,7 +10,10 @@ import UIKit
 final class PlantsCollectionViewController: UIViewController {
     
     var sample = ["Ficus", "Ficus","Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus"]
+    var rooms = [3, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6]
+    
     private let reuseIdentifier = "PlantCell"
+    private let reuseIdentifierRoom = "RoomCell"
 
     private let sectionInsets = UIEdgeInsets(
         top: 50.0,
@@ -36,7 +39,7 @@ final class PlantsCollectionViewController: UIViewController {
     
     private var plantsCollectionView: UICollectionView
     
-    private let roomsCollectionView = UITableView(frame: .zero)
+    private let roomsCollectionView = UITableView(frame: .zero, style: .insetGrouped)
     
     private let plantsUILabel: UILabel = {
         var label = UILabel()
@@ -106,10 +109,28 @@ final class PlantsCollectionViewController: UIViewController {
         plantsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         plantsCollectionView.dataSource = self
         
-        plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        view.addSubview(roomsCollectionView)
+        roomsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        roomsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        roomsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        roomsCollectionView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 16).isActive = true
+        roomsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        roomsCollectionView.dataSource = self
+        roomsCollectionView.isHidden = true
         
+        roomsCollectionView.register(RoomsTableViewCell.self, forCellReuseIdentifier: reuseIdentifierRoom)
+        roomsCollectionView.dataSource = self
+        roomsCollectionView.rowHeight = 80
+        
+        roomsCollectionView.delegate = self
+        
+        
+        plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        plantsCollectionView.delegate = self
         
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        
+        toggle.addTarget(self, action: #selector(changeViewWithToggle), for: .touchUpInside)
     }
     
     static func generatePlantsCollectionViewLayout() -> UICollectionViewLayout {
@@ -154,10 +175,38 @@ final class PlantsCollectionViewController: UIViewController {
         }
         present(nav, animated: true, completion: nil)
     }
+    
+    @objc
+    func changeViewWithToggle() {
+        if toggle.isOn {
+            changeFromPlantsToRooms()
+        } else {
+            changeFromRoomsToPlants()
+        }
+    }
+    
+    func changeFromPlantsToRooms() {
+        plantsCollectionView.isUserInteractionEnabled = false
+        plantsCollectionView.isHidden = true
+        
+        roomsCollectionView.isUserInteractionEnabled = true
+        roomsCollectionView.isHidden = false
+    }
+    
+    func changeFromRoomsToPlants() {
+        plantsCollectionView.isUserInteractionEnabled = true
+        plantsCollectionView.isHidden = false
+        
+        roomsCollectionView.isUserInteractionEnabled = false
+        roomsCollectionView.isHidden = true
+    }
 }
 
 extension PlantsCollectionViewController: UICollectionViewDelegate {
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let plantInfoView = PlantInfoView()
+        navigationController?.pushViewController(plantInfoView, animated: true)
+    }
 }
 
 extension PlantsCollectionViewController: UICollectionViewDataSource {
@@ -172,7 +221,25 @@ extension PlantsCollectionViewController: UICollectionViewDataSource {
         cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
         return cell
     }
+}
 
+extension PlantsCollectionViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        rooms.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = roomsCollectionView.dequeueReusableCell(withIdentifier: reuseIdentifierRoom, for: indexPath) as! RoomsTableViewCell
+        cell.configure(count: rooms[indexPath.row])
+        return cell
+    }
+}
+
+extension PlantsCollectionViewController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let plantInfoView = PlantInfoView()
+//        navigationController?.pushViewController(plantInfoView, animated: true)
+    }
 }
 
 //// MARK: - Collection View Flow Layout Delegate
