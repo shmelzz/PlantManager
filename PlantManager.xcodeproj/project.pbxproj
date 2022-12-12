@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */; };
+		CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */; };
 		CC34637629432CD700E07172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637529432CD700E07172 /* AppDelegate.swift */; };
 		CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637729432CD700E07172 /* SceneDelegate.swift */; };
 		CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC34637E29432CD700E07172 /* PlantManager.xcdatamodeld */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
+		CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		CC34637229432CD700E07172 /* PlantManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC34637529432CD700E07172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC34637729432CD700E07172 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 				CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */,
 				CC34639529433C4300E07172 /* DiscoverViewController.swift */,
 				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
+				CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */,
+				CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -176,12 +182,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */,
 				CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */,
 				CC34639A2943429900E07172 /* TabBarController.swift in Sources */,
 				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
 				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
+				CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
 				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
@@ -328,8 +336,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -359,8 +368,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
