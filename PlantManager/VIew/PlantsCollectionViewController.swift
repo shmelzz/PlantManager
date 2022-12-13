@@ -9,8 +9,41 @@ import UIKit
 
 final class PlantsCollectionViewController: UIViewController {
     
-    var sample = ["Ficus", "Ficus","Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus"]
+    // var sample = ["Ficus", "Ficus","Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus"]
     var rooms = [3, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6]
+    
+    var plants: [Plant] = [
+        Plant(name: "Lukas",
+              plantType: PlantType(title: "Ficus"),
+              place: Room(name: "Living Room"),
+              purchaseDay: Date(),
+              wateringSpan: 7
+             ),
+        Plant(name: "Lukas 2",
+              plantType: PlantType(title: "Ficus"),
+              place: Room(name: "Living Room"),
+              purchaseDay: Date(),
+              wateringSpan: 7
+             ),
+        Plant(name: "Lukas 3",
+              plantType: PlantType(title: "Ficus"),
+              place: Room(name: "Living Room"),
+              purchaseDay: Date(),
+              wateringSpan: 7
+             ),
+        Plant(name: "Lukas 4",
+              plantType: PlantType(title: "Ficus"),
+              place: Room(name: "Living Room"),
+              purchaseDay: Date(),
+              wateringSpan: 7
+             ),
+        Plant(name: "Lukas 5",
+              plantType: PlantType(title: "Ficus"),
+              place: Room(name: "Living Room"),
+              purchaseDay: Date(),
+              wateringSpan: 7
+             )
+    ]
     
     private let reuseIdentifier = "PlantCell"
     private let reuseIdentifierRoom = "RoomCell"
@@ -28,9 +61,12 @@ final class PlantsCollectionViewController: UIViewController {
             let view = UICollectionView(frame: .zero, collectionViewLayout: PlantsCollectionViewController.generatePlantsCollectionViewLayout())
             return view
         }()
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
         super.init(nibName: nil, bundle: nil)
     }
     
+    var dateFormatter: DateFormatter
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
@@ -125,6 +161,7 @@ final class PlantsCollectionViewController: UIViewController {
         roomsCollectionView.delegate = self
         
         
+        
         plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         plantsCollectionView.delegate = self
         
@@ -160,20 +197,31 @@ final class PlantsCollectionViewController: UIViewController {
     
     @objc
     func addButtonPressed() {
-        var addView: AddView
+        // var addView: AddView
+        // var nav = UINavigationController()
         if toggle.isOn {
-            addView = AddRoomViewController()
+            var addView = AddRoomViewController()
+            
+            let nav = UINavigationController(rootViewController: addView)
+            if let sheetController = nav.sheetPresentationController {
+              sheetController.detents = [.medium(), .large()]
+              sheetController.preferredCornerRadius = 24
+              sheetController.prefersGrabberVisible = true
+            }
+            present(nav, animated: true, completion: nil)
         } else {
-            addView = AddPlantViewController()
+            var addView = AddPlantViewController()
+            
+            addView.delegate = self
+            
+            let nav = UINavigationController(rootViewController: addView)
+            if let sheetController = nav.sheetPresentationController {
+              sheetController.detents = [.medium(), .large()]
+              sheetController.preferredCornerRadius = 24
+              sheetController.prefersGrabberVisible = true
+            }
+            present(nav, animated: true, completion: nil)
         }
-        
-        let nav = UINavigationController(rootViewController: addView)
-        if let sheetController = nav.sheetPresentationController {
-          sheetController.detents = [.medium(), .large()]
-          sheetController.preferredCornerRadius = 16
-          sheetController.prefersGrabberVisible = true
-        }
-        present(nav, animated: true, completion: nil)
     }
     
     @objc
@@ -200,24 +248,30 @@ final class PlantsCollectionViewController: UIViewController {
         roomsCollectionView.isUserInteractionEnabled = false
         roomsCollectionView.isHidden = true
     }
+    
+//    public static func addPlant(plant: Plant) {
+//        plants.append(plant)
+//
+//    }
 }
 
 extension PlantsCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let plantInfoView = PlantInfoView()
+        plantInfoView.plant = plants[indexPath.row]
         navigationController?.pushViewController(plantInfoView, animated: true)
     }
 }
 
 extension PlantsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sample.count
+        return plants.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = plantsCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PlantCollectionViewCell
-        cell.cellText = "Living Room"
-        cell.plantNameText = sample[indexPath.row]
+        cell.cellText = plants[indexPath.row].place.name
+        cell.plantNameText = plants[indexPath.row].name
         cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
         return cell
     }
@@ -239,6 +293,14 @@ extension PlantsCollectionViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let plantInfoView = PlantInfoView()
 //        navigationController?.pushViewController(plantInfoView, animated: true)
+    }
+}
+
+extension PlantsCollectionViewController: AddPlantDelegate {
+    func addNewPlantToCollection(newPlant: Plant) {
+        plants.insert(newPlant, at: 0)
+        print(plants.count)
+        plantsCollectionView.reloadData()
     }
 }
 

@@ -13,14 +13,14 @@ struct Room {
 
 struct PlantType {
     
-    enum PlantAverageSize {
-        case small
-        case medium
-        case large
-    }
-    
+//    enum PlantAverageSize {
+//        case small
+//        case medium
+//        case large
+//    }
+//
     let title: String
-    let size: PlantAverageSize
+    // let size: PlantAverageSize
 }
 
 struct Plant {
@@ -28,4 +28,5 @@ struct Plant {
     var plantType: PlantType
     var place: Room
     var purchaseDay: Date
+    var wateringSpan: Int
 }
