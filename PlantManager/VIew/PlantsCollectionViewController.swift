@@ -6,48 +6,20 @@
 //
 
 import UIKit
+import CoreData
 
 
 final class PlantsCollectionViewController: UIViewController {
     
-    var rooms = [3, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6]
+    var rooms = [3, 4, 5]
     
-    var plants: [Plant] = [
-        Plant(name: "Lukas",
-              plantType: PlantType(title: "Ficus"),
-              place: Room(name: "Living Room"),
-              purchaseDay: Date(),
-              wateringSpan: 7
-             ),
-        Plant(name: "Lukas 2",
-              plantType: PlantType(title: "Ficus"),
-              place: Room(name: "Living Room"),
-              purchaseDay: Date(),
-              wateringSpan: 7
-             ),
-        Plant(name: "Lukas 3",
-              plantType: PlantType(title: "Ficus"),
-              place: Room(name: "Living Room"),
-              purchaseDay: Date(),
-              wateringSpan: 7
-             ),
-        Plant(name: "Lukas 4",
-              plantType: PlantType(title: "Ficus"),
-              place: Room(name: "Living Room"),
-              purchaseDay: Date(),
-              wateringSpan: 7
-             ),
-        Plant(name: "Lukas 5",
-              plantType: PlantType(title: "Ficus"),
-              place: Room(name: "Living Room"),
-              purchaseDay: Date(),
-              wateringSpan: 7
-             )
-    ]
+    var plantsCollection: [NSManagedObject] = []
+    
+    var plants: [Plant] = []
     
     private let reuseIdentifier = "PlantCell"
     private let reuseIdentifierRoom = "RoomCell"
-
+    
     private let sectionInsets = UIEdgeInsets(
         top: 50.0,
         left: 20.0,
@@ -67,7 +39,7 @@ final class PlantsCollectionViewController: UIViewController {
     }
     
     var dateFormatter: DateFormatter
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -107,7 +79,12 @@ final class PlantsCollectionViewController: UIViewController {
         button.configuration = config
         return button
     }()
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        plantsCollectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "My Plants"
@@ -124,7 +101,7 @@ final class PlantsCollectionViewController: UIViewController {
         toggle.topAnchor.constraint(equalTo: view.topAnchor, constant: 110).isActive = true
         toggle.leadingAnchor.constraint(equalTo: plantsUILabel.trailingAnchor, constant: 16).isActive = true
         toggle.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
+        
         view.addSubview(roomsUILabel)
         roomsUILabel.translatesAutoresizingMaskIntoConstraints = false
         roomsUILabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
@@ -168,6 +145,8 @@ final class PlantsCollectionViewController: UIViewController {
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         
         toggle.addTarget(self, action: #selector(changeViewWithToggle), for: .touchUpInside)
+        
+        fetchData()
     }
     
     static func generatePlantsCollectionViewLayout() -> UICollectionViewLayout {
@@ -188,10 +167,10 @@ final class PlantsCollectionViewController: UIViewController {
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         fullPhotoItem.contentInsets = NSDirectionalEdgeInsets(
-          top: 4,
-          leading: 4,
-          bottom: 4,
-          trailing: 4)
+            top: 4,
+            leading: 4,
+            bottom: 4,
+            trailing: 4)
         return layout
     }
     
@@ -204,9 +183,9 @@ final class PlantsCollectionViewController: UIViewController {
             
             let nav = UINavigationController(rootViewController: addView)
             if let sheetController = nav.sheetPresentationController {
-              sheetController.detents = [.medium(), .large()]
-              sheetController.preferredCornerRadius = 24
-              sheetController.prefersGrabberVisible = true
+                sheetController.detents = [.medium(), .large()]
+                sheetController.preferredCornerRadius = 24
+                sheetController.prefersGrabberVisible = true
             }
             present(nav, animated: true, completion: nil)
         } else {
@@ -216,9 +195,9 @@ final class PlantsCollectionViewController: UIViewController {
             
             let nav = UINavigationController(rootViewController: addView)
             if let sheetController = nav.sheetPresentationController {
-              sheetController.detents = [.medium(), .large()]
-              sheetController.preferredCornerRadius = 24
-              sheetController.prefersGrabberVisible = true
+                sheetController.detents = [.medium(), .large()]
+                sheetController.preferredCornerRadius = 24
+                sheetController.prefersGrabberVisible = true
             }
             present(nav, animated: true, completion: nil)
         }
@@ -248,13 +227,9 @@ final class PlantsCollectionViewController: UIViewController {
         roomsCollectionView.isUserInteractionEnabled = false
         roomsCollectionView.isHidden = true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        plantsCollectionView.reloadData()
-    }
 }
 
+// MARK: - UICollectionViewDelegate
 extension PlantsCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let plantInfoView = PlantInfoView()
@@ -265,20 +240,29 @@ extension PlantsCollectionViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension PlantsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return plants.count
+        // return plantsCollection.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = plantsCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PlantCollectionViewCell
-        cell.cellText = plants[indexPath.row].place.name
+        cell.roomNameText = plants[indexPath.row].place.name
         cell.plantNameText = plants[indexPath.row].name
+        cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
+        //        let plant = plantsCollection[indexPath.row]
+        //
+        //        cell.roomNameText = plant.value(forKey: "place") as? String ?? "-"
+        //        cell.plantNameText = plant.value(forKey: "name") as? String ?? "-"
+        
         cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
         return cell
     }
 }
 
+// MARK: - UITableViewDataSource
 extension PlantsCollectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         rooms.count
@@ -291,23 +275,116 @@ extension PlantsCollectionViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension PlantsCollectionViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let plantInfoView = PlantInfoView()
-//        navigationController?.pushViewController(plantInfoView, animated: true)
+        //        let plantInfoView = PlantInfoView()
+        //        navigationController?.pushViewController(plantInfoView, animated: true)
     }
 }
 
+// MARK: - AddPlantDelegate
 extension PlantsCollectionViewController: AddPlantDelegate {
     func addNewPlantToCollection(newPlant: Plant) {
         plants.insert(newPlant, at: 0)
         plantsCollectionView.reloadData()
+        self.savePlant(plantToSave: newPlant)
     }
 }
 
+// MARK: - PlantWasEditedDelegate
 extension PlantsCollectionViewController: PlantWasEditedDelegate {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?) {
         plants[indexPath.row] = newInfoPlant ?? plants[indexPath.row]
+        self.editObject(index: indexPath.row, plantToEdit: newInfoPlant ?? plants[indexPath.row])
         plantsCollectionView.reloadData()
+    }
+}
+
+// MARK: - CoreData
+extension PlantsCollectionViewController {
+    func savePlant(plantToSave: Plant) {
+        
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext =
+        appDelegate.persistentContainer.viewContext
+        
+        let entity =
+        NSEntityDescription.entity(forEntityName: "PlantEntity", in: managedContext)!
+        
+        let plant = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        plant.setValue(plantToSave.name, forKey: "name")
+        plant.setValue(plantToSave.place.name, forKey: "place")
+        plant.setValue(plantToSave.wateringSpan, forKey: "wateringSpan")
+        plant.setValue(plantToSave.plantType.title, forKey: "plantType")
+        plant.setValue(plantToSave.purchaseDay, forKey: "purchaseDay")
+        
+        do {
+            try managedContext.save()
+            plantsCollection.append(plant)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func fetchData() {
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "PlantEntity")
+        
+        do {
+            plantsCollection = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        for obj in plantsCollection {
+            let name = obj.value(forKey: "name") as? String ?? "-"
+            print(name)
+            let place = Room(name: obj.value(forKey: "place") as? String ?? "-")
+            let plantType = PlantType(title: obj.value(forKey: "plantType") as? String ?? "-")
+            let date = obj.value(forKey: "purchaseDay") as? Date ?? Date()
+            let wateringSpan = obj.value(forKey: "wateringSpan") as? Int ?? 0
+            let plant = Plant(name: name, plantType: plantType, place: place, purchaseDay: date, wateringSpan: wateringSpan)
+            plants.append(plant)
+        }
+    }
+    
+    func editObject(index: Int, plantToEdit: Plant) {
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        managedContext.delete(self.plantsCollection[index])
+        self.plantsCollection.remove(at: index)
+        
+        let entity = NSEntityDescription.entity(forEntityName: "PlantEntity", in: managedContext)!
+        
+        let plant = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        plant.setValue(plantToEdit.name, forKey: "name")
+        plant.setValue(plantToEdit.place.name, forKey: "place")
+        plant.setValue(plantToEdit.wateringSpan, forKey: "wateringSpan")
+        plant.setValue(plantToEdit.plantType.title, forKey: "plantType")
+        plant.setValue(plantToEdit.purchaseDay, forKey: "purchaseDay")
+        
+        do {
+            try managedContext.save()
+            plantsCollection[index] = plant
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 }

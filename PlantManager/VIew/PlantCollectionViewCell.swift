@@ -14,7 +14,7 @@ final class PlantCollectionViewCell: UICollectionViewCell {
     private let plantImage = UIImageView()
     
 
-    var cellText: String {
+    var roomNameText: String {
         get {
             roomLabel.text ?? ""
         }
