@@ -61,14 +61,19 @@ final class PlantSettingsViewController: UIViewController, AddView {
         return button
     }()
     
-    private lazy var datePicker: UIDatePicker = {
-      let datePicker = UIDatePicker(frame: .zero)
-      datePicker.datePickerMode = .date
-      datePicker.timeZone = TimeZone.current
-      return datePicker
+    private var purchaseDateInput: UIDatePicker = {
+        let datePicker = UIDatePicker(frame: .zero)
+        datePicker.datePickerMode = .date
+        datePicker.timeZone = TimeZone.current
+        datePicker.maximumDate = Date()
+        return datePicker
     }()
     
-    private var purchaseDateInput = UITextField()
+    private var purchaseDateLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Purchase date:    "
+        return label
+    }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,7 +85,7 @@ final class PlantSettingsViewController: UIViewController, AddView {
         plantNameInput.text = plant?.name
         plantTypeInput.text = plant?.plantType.title
         roomNameInput.text = plant?.place.name
-        purchaseDateInput.text = plant?.purchaseDay.formatted()
+        purchaseDateInput.date = plant?.purchaseDay ?? Date()
         wateringSpanStepper.value = Double(plant?.wateringSpan ?? 0)
         wateringSpanValueChanged()
     }
@@ -108,11 +113,14 @@ final class PlantSettingsViewController: UIViewController, AddView {
         
         
         view.addSubview(purchaseDateInput)
-        purchaseDateInput.borderStyle = .roundedRect
         purchaseDateInput.translatesAutoresizingMaskIntoConstraints = false
         purchaseDateInput.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 8).isActive = true
-        purchaseDateInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         purchaseDateInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
+        
+        view.addSubview(purchaseDateLabel)
+        purchaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        purchaseDateLabel.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 10).isActive = true
+        purchaseDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         
         view.addSubview(wateringSpanLabel)
         wateringSpanLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -130,9 +138,6 @@ final class PlantSettingsViewController: UIViewController, AddView {
         deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -36).isActive = true
         
-        // purchaseDateInput.inputView = datePicker
-        // datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
-        purchaseDateInput.placeholder = "purchase date"
         wateringSpanStepper.addTarget(self, action: #selector(wateringSpanValueChanged), for: .valueChanged)
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
@@ -141,10 +146,6 @@ final class PlantSettingsViewController: UIViewController, AddView {
     
     @objc func wateringSpanValueChanged() {
         wateringSpanLabel.text = "Watering span:    \(Int(wateringSpanStepper.value)) days"
-     }
-    
-    @objc func handleDatePicker(sender: UIDatePicker) {
-          purchaseDateInput.text = DateUtils.dateFormatter.string(from: sender.date)
      }
     
     private func setupNavBar() {
@@ -169,8 +170,11 @@ final class PlantSettingsViewController: UIViewController, AddView {
         let name = plantNameInput.text ?? "none"
         let type = plantTypeInput.text ?? "none"
         let room = Room(name: roomNameInput.text ?? "none")
-        let date = purchaseDateInput.text ?? "none"
-        let newPlant = Plant(name: name, plantType: PlantType(title: type), place: room, purchaseDay: Date(),
+        let date = purchaseDateInput.date
+        let newPlant = Plant(name: name,
+                             plantType: PlantType(title: type),
+                             place: room,
+                             purchaseDay: date,
                              wateringSpan: Int(wateringSpanStepper.value))
         self.plant = newPlant
         delegate?.plantWasEdited(editedPlant: newPlant)

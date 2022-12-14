@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Room {
     let name: String
@@ -29,4 +30,5 @@ struct Plant {
     var place: Room
     var purchaseDay: Date
     var wateringSpan: Int
+    var image: UIImage?
 }

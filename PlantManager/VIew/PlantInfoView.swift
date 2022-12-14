@@ -43,7 +43,6 @@ final class PlantInfoView: UIViewController {
         )
         
         setupView()
-        plantImage.image = UIImage(named: "plant_img") ?? UIImage()
         updateTitle()
     }
     
@@ -94,7 +93,6 @@ final class PlantInfoView: UIViewController {
         aboutInfoView.topAnchor.constraint(equalTo: aboutButton.bottomAnchor, constant: 16).isActive = true
         aboutInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         aboutInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-//        aboutInfoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 56).isActive = true
         
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
         careButton.changeNotSelectedButtonView(title: "Care")
@@ -103,6 +101,8 @@ final class PlantInfoView: UIViewController {
         careButton.addTarget(self, action: #selector(careButtonTapped), for: .touchUpInside)
         aboutButton.addTarget(self, action: #selector(aboutButtonTapped), for: .touchUpInside)
         setupAboutView()
+        
+        plantImage.image = plant?.image ?? UIImage(named: "plant_img")
     }
     
     

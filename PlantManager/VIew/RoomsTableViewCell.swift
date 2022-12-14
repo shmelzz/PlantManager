@@ -57,8 +57,8 @@ final class RoomsTableViewCell: UITableViewCell {
     }
     
     // MARK: - Cell config
-    public func configure(count: Int) {
-        cellText = "Living Room"
+    public func configure(count: Int, roomName: String) {
+        cellText = roomName
         plantNameText = "\(count) plants"
     }
     

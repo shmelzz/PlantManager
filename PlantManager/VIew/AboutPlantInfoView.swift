@@ -31,7 +31,10 @@ final class AboutPlantInfoView: UIStackView {
     
     var plantInfo: Plant {
         get {
-            plant ?? Plant(name: "none", plantType: PlantType(title: "none"), place: Room(name: "none"), purchaseDay: Date(),
+            plant ?? Plant(name: "none",
+                           plantType: PlantType(title: "none"),
+                           place: Room(name: "none"),
+                           purchaseDay: Date(),
                            wateringSpan: 0)
         }
         set {
@@ -48,8 +51,8 @@ final class AboutPlantInfoView: UIStackView {
     private func configureLabels(){
         typeLabel.text = "Plant type: \(plant?.plantType.title ?? "")"
         placeLabel.text = "Place: \(plant?.place.name ?? "")"
-        purchaseLabel.text = "Purchase day: \(plant?.purchaseDay.formatted() ?? "")"
         wateringSpanLabel.text = "Watering: Every \(plant?.wateringSpan ?? 0) days"
+        purchaseLabel.text = "Purchase day: \(plant?.purchaseDay.formatted(date: .long, time: .omitted) ?? "")"
     }
     
     private func setupView() {

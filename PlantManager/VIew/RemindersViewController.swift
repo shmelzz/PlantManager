@@ -12,5 +12,6 @@ final class RemindersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Reminders"
+        self.view.backgroundColor = .white
     }
 }

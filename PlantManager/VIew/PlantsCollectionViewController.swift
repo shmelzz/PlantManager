@@ -11,10 +11,13 @@ import CoreData
 
 final class PlantsCollectionViewController: UIViewController {
     
-    var rooms = [3, 4, 5]
+    struct RoomCount {
+        let name: String
+        var count: Int
+    }
     
+    var rooms: [RoomCount] = []
     var plantsCollection: [NSManagedObject] = []
-    
     var plants: [Plant] = []
     
     private let reuseIdentifier = "PlantCell"
@@ -33,12 +36,8 @@ final class PlantsCollectionViewController: UIViewController {
             let view = UICollectionView(frame: .zero, collectionViewLayout: PlantsCollectionViewController.generatePlantsCollectionViewLayout())
             return view
         }()
-        dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
         super.init(nibName: nil, bundle: nil)
     }
-    
-    var dateFormatter: DateFormatter
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
@@ -63,7 +62,7 @@ final class PlantsCollectionViewController: UIViewController {
     
     private let toggle: UISwitch = {
         var toggle = UISwitch()
-        toggle.tintColor = .systemGreen
+        toggle.onTintColor = UIColor(red: 0.18, green: 0.45, blue: 0.20, alpha: 0.55)
         return toggle
     }()
     
@@ -88,7 +87,7 @@ final class PlantsCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "My Plants"
-        self.view.backgroundColor = UIColor(red: 18, green: 45, blue: 20, alpha: 0.5)
+        self.view.backgroundColor = .white
         
         view.addSubview(plantsUILabel)
         plantsUILabel.translatesAutoresizingMaskIntoConstraints = false
@@ -136,17 +135,14 @@ final class PlantsCollectionViewController: UIViewController {
         roomsCollectionView.rowHeight = 80
         
         roomsCollectionView.delegate = self
-        
-        
-        
         plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         plantsCollectionView.delegate = self
         
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        
         toggle.addTarget(self, action: #selector(changeViewWithToggle), for: .touchUpInside)
         
         fetchData()
+        getRooms()
     }
     
     static func generatePlantsCollectionViewLayout() -> UICollectionViewLayout {
@@ -179,7 +175,7 @@ final class PlantsCollectionViewController: UIViewController {
         // var addView: AddView
         // var nav = UINavigationController()
         if toggle.isOn {
-            var addView = AddRoomViewController()
+            let addView = AddRoomViewController()
             
             let nav = UINavigationController(rootViewController: addView)
             if let sheetController = nav.sheetPresentationController {
@@ -189,8 +185,7 @@ final class PlantsCollectionViewController: UIViewController {
             }
             present(nav, animated: true, completion: nil)
         } else {
-            var addView = AddPlantViewController()
-            
+            let addView = AddPlantViewController()
             addView.delegate = self
             
             let nav = UINavigationController(rootViewController: addView)
@@ -213,11 +208,13 @@ final class PlantsCollectionViewController: UIViewController {
     }
     
     func changeFromPlantsToRooms() {
+        self.getRooms()
         plantsCollectionView.isUserInteractionEnabled = false
         plantsCollectionView.isHidden = true
         
         roomsCollectionView.isUserInteractionEnabled = true
         roomsCollectionView.isHidden = false
+        roomsCollectionView.reloadData()
     }
     
     func changeFromRoomsToPlants() {
@@ -226,6 +223,23 @@ final class PlantsCollectionViewController: UIViewController {
         
         roomsCollectionView.isUserInteractionEnabled = false
         roomsCollectionView.isHidden = true
+    }
+    
+    private func getRooms() {
+        var roomsDictionary: [String: Int] = [:]
+        for plant in plants {
+            if roomsDictionary.keys.contains(plant.place.name) {
+                roomsDictionary[plant.place.name]!+=1
+            } else {
+                roomsDictionary[plant.place.name] = 1
+            }
+        }
+        
+        rooms = []
+        for (key, value) in roomsDictionary {
+            let roomCount = RoomCount(name: key, count: value)
+            rooms.append(roomCount)
+        }
     }
 }
 
@@ -245,20 +259,13 @@ extension PlantsCollectionViewController: UICollectionViewDelegate {
 extension PlantsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return plants.count
-        // return plantsCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = plantsCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PlantCollectionViewCell
         cell.roomNameText = plants[indexPath.row].place.name
         cell.plantNameText = plants[indexPath.row].name
-        cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
-        //        let plant = plantsCollection[indexPath.row]
-        //
-        //        cell.roomNameText = plant.value(forKey: "place") as? String ?? "-"
-        //        cell.plantNameText = plant.value(forKey: "name") as? String ?? "-"
-        
-        cell.plantImageView = UIImage(named: "plant_img") ?? UIImage()
+        cell.plantImageView = plants[indexPath.row].image ?? UIImage(named: "plant_img") ?? UIImage()
         return cell
     }
 }
@@ -271,7 +278,7 @@ extension PlantsCollectionViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = roomsCollectionView.dequeueReusableCell(withIdentifier: reuseIdentifierRoom, for: indexPath) as! RoomsTableViewCell
-        cell.configure(count: rooms[indexPath.row])
+        cell.configure(count: rooms[indexPath.row].count,roomName: rooms[indexPath.row].name)
         return cell
     }
 }
@@ -313,6 +320,8 @@ extension PlantsCollectionViewController: PlantWasDeletedDelegate {
 
 // MARK: - CoreData
 extension PlantsCollectionViewController {
+    
+    // MARK: save data
     func savePlant(plantToSave: Plant) {
         
         guard let appDelegate =
@@ -342,6 +351,7 @@ extension PlantsCollectionViewController {
         }
     }
     
+    // MARK: fetch data
     func fetchData() {
         guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
@@ -369,6 +379,7 @@ extension PlantsCollectionViewController {
         }
     }
     
+    // MARK: edit data
     func editObject(index: Int, plantToEdit: Plant) {
         guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
@@ -392,12 +403,17 @@ extension PlantsCollectionViewController {
         
         do {
             try managedContext.save()
-            plantsCollection[index] = plant
+            if plantsCollection.count == 0 {
+                plantsCollection.append(plant)
+            } else {
+                plantsCollection[index] = plant
+            }
         } catch let error as NSError {
             print("Could not edit. \(error), \(error.userInfo)")
         }
     }
     
+    // MARK: delete data
     func deleteObject(index: Int) {
         guard let appDelegate =
                 UIApplication.shared.delegate as? AppDelegate else {
