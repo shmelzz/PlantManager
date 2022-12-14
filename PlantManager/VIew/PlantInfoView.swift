@@ -11,6 +11,14 @@ protocol PlantWasEditedDelegate: AnyObject {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?)
 }
 
+protocol PlantWasDeletedDelegate: AnyObject {
+    func plantWithIndexWasDeleted(indexPath: IndexPath)
+}
+
+protocol PlantWasDeletedSettingsDelegate: AnyObject {
+    func plantWasDeleted()
+}
+
 final class PlantInfoView: UIViewController {
     
     var plant: Plant?
@@ -21,6 +29,7 @@ final class PlantInfoView: UIViewController {
     private let aboutInfoView = AboutPlantInfoView()
     
     weak var delegate: PlantWasEditedDelegate?
+    weak var deleteDelegate: PlantWasDeletedDelegate?
     var plantIndexPath: IndexPath?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +111,7 @@ final class PlantInfoView: UIViewController {
         let settingsView = PlantSettingsViewController()
         settingsView.plant = self.plant
         settingsView.delegate = self
+        settingsView.deleteDelegate = self
         let nav = UINavigationController(rootViewController: settingsView)
         if let sheetController = nav.sheetPresentationController {
             sheetController.detents = [.medium(), .large()]
@@ -152,6 +162,19 @@ extension PlantInfoView: EditPlantDelegate {
         aboutInfoView.updatePlantInfo(newInfo: self.plant)
         updateTitle()
         delegate?.plantWithIndexWasEdited(indexPath: plantIndexPath ?? IndexPath(), newInfoPlant: self.plant)
+    }
+}
+
+extension PlantInfoView: PlantWasDeletedDelegate {
+    func plantWithIndexWasDeleted(indexPath: IndexPath) {
+        deleteDelegate?.plantWithIndexWasDeleted(indexPath: indexPath)
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension PlantInfoView: PlantWasDeletedSettingsDelegate {
+    func plantWasDeleted() {
+        plantWithIndexWasDeleted(indexPath: plantIndexPath ?? IndexPath())
     }
 }
 

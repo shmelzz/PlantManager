@@ -236,6 +236,7 @@ extension PlantsCollectionViewController: UICollectionViewDelegate {
         plantInfoView.plant = plants[indexPath.row]
         plantInfoView.plantIndexPath = indexPath
         plantInfoView.delegate = self
+        plantInfoView.deleteDelegate = self
         navigationController?.pushViewController(plantInfoView, animated: true)
     }
 }
@@ -297,6 +298,15 @@ extension PlantsCollectionViewController: PlantWasEditedDelegate {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?) {
         plants[indexPath.row] = newInfoPlant ?? plants[indexPath.row]
         self.editObject(index: indexPath.row, plantToEdit: newInfoPlant ?? plants[indexPath.row])
+        plantsCollectionView.reloadData()
+    }
+}
+
+// MARK: - PlantWasDeletedDelegate
+extension PlantsCollectionViewController: PlantWasDeletedDelegate {
+    func plantWithIndexWasDeleted(indexPath: IndexPath) {
+        plants.remove(at: indexPath.row)
+        self.deleteObject(index: indexPath.row)
         plantsCollectionView.reloadData()
     }
 }
@@ -384,7 +394,24 @@ extension PlantsCollectionViewController {
             try managedContext.save()
             plantsCollection[index] = plant
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("Could not edit. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func deleteObject(index: Int) {
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        managedContext.delete(self.plantsCollection[index])
+        self.plantsCollection.remove(at: index)
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
         }
     }
 }

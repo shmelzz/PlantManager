@@ -15,6 +15,7 @@ final class PlantSettingsViewController: UIViewController, AddView {
     
     var plant: Plant?
     weak var delegate: EditPlantDelegate?
+    weak var deleteDelegate: PlantWasDeletedSettingsDelegate?
     
     private var plantNameInput: UITextField = {
         let input = UITextField()
@@ -47,6 +48,17 @@ final class PlantSettingsViewController: UIViewController, AddView {
     private let wateringSpanLabel: UILabel = {
         let label = UILabel()
         return label
+    }()
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        var config = UIButton.Configuration.plain()
+        config.titleAlignment = .center
+        config.title = "Delete"
+        config.baseForegroundColor = .systemRed
+        config.buttonSize = .medium
+        button.configuration = config
+        return button
     }()
     
     private lazy var datePicker: UIDatePicker = {
@@ -113,10 +125,16 @@ final class PlantSettingsViewController: UIViewController, AddView {
         wateringSpanStepper.leadingAnchor.constraint(equalTo: wateringSpanLabel.trailingAnchor, constant: 12).isActive = true
         wateringSpanStepper.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
+        view.addSubview(deleteButton)
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -36).isActive = true
+        
         // purchaseDateInput.inputView = datePicker
         // datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
         purchaseDateInput.placeholder = "purchase date"
         wateringSpanStepper.addTarget(self, action: #selector(wateringSpanValueChanged), for: .valueChanged)
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
         setupCurrentSettings()
     }
@@ -133,6 +151,12 @@ final class PlantSettingsViewController: UIViewController, AddView {
         self.title = "Settings"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
+    }
+    
+    @objc
+    func deleteButtonTapped() {
+        deleteDelegate?.plantWasDeleted()
+        self.dismiss(animated: true)
     }
     
     @objc
