@@ -10,6 +10,10 @@ import UIKit
 final class AboutPlantInfoView: UIStackView {
     
     private var plant: Plant?
+    private let typeLabel = UILabel()
+    private let placeLabel = UILabel()
+    private let purchaseLabel = UILabel()
+    private let wateringSpanLabel = UILabel()
     
     init(plant: Plant? = nil) {
         self.plant = plant
@@ -18,7 +22,7 @@ final class AboutPlantInfoView: UIStackView {
         self.alignment = .leading
         self.distribution = .equalSpacing
         self.axis = .vertical
-        self.spacing = 12
+        self.spacing = 18
     }
     
     required init(coder: NSCoder) {
@@ -36,19 +40,20 @@ final class AboutPlantInfoView: UIStackView {
         }
     }
     
-    private func setupView() {
-        let typeLabel = UILabel()
+    func updatePlantInfo(newInfo: Plant?) {
+        self.plant = newInfo
+        configureLabels()
+    }
+    
+    private func configureLabels(){
         typeLabel.text = "Plant type: \(plant?.plantType.title ?? "")"
-        typeLabel.textColor = .black
-        
-        let placeLabel = UILabel()
         placeLabel.text = "Place: \(plant?.place.name ?? "")"
-        
-        let purchaseLabel = UILabel()
         purchaseLabel.text = "Purchase day: \(plant?.purchaseDay.formatted() ?? "")"
-        
-        let wateringSpanLabel = UILabel()
         wateringSpanLabel.text = "Watering: Every \(plant?.wateringSpan ?? 0) days"
+    }
+    
+    private func setupView() {
+        configureLabels()
         
         self.addArrangedSubview(typeLabel)
         self.addArrangedSubview(placeLabel)

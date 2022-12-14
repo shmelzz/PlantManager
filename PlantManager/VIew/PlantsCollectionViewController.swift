@@ -7,9 +7,9 @@
 
 import UIKit
 
+
 final class PlantsCollectionViewController: UIViewController {
     
-    // var sample = ["Ficus", "Ficus","Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus", "Ficus"]
     var rooms = [3, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6, 4, 5, 6]
     
     var plants: [Plant] = [
@@ -249,16 +249,18 @@ final class PlantsCollectionViewController: UIViewController {
         roomsCollectionView.isHidden = true
     }
     
-//    public static func addPlant(plant: Plant) {
-//        plants.append(plant)
-//
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        plantsCollectionView.reloadData()
+    }
 }
 
 extension PlantsCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let plantInfoView = PlantInfoView()
         plantInfoView.plant = plants[indexPath.row]
+        plantInfoView.plantIndexPath = indexPath
+        plantInfoView.delegate = self
         navigationController?.pushViewController(plantInfoView, animated: true)
     }
 }
@@ -299,42 +301,13 @@ extension PlantsCollectionViewController:UITableViewDelegate {
 extension PlantsCollectionViewController: AddPlantDelegate {
     func addNewPlantToCollection(newPlant: Plant) {
         plants.insert(newPlant, at: 0)
-        print(plants.count)
         plantsCollectionView.reloadData()
     }
 }
 
-//// MARK: - Collection View Flow Layout Delegate
-//extension PlantsCollectionViewController: UICollectionViewDelegateFlowLayout {
-//
-//  // 1
-//  func collectionView(
-//    _ collectionView: UICollectionView,
-//    layout collectionViewLayout: UICollectionViewLayout,
-//    sizeForItemAt indexPath: IndexPath
-//  ) -> CGSize {
-//    // 2
-//    let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-//    let availableWidth = view.frame.width - paddingSpace
-//    let widthPerItem = availableWidth / itemsPerRow
-//    return CGSize(width: widthPerItem, height: widthPerItem)
-//  }
-//
-//  // 3
-//  func collectionView(
-//    _ collectionView: UICollectionView,
-//    layout collectionViewLayout: UICollectionViewLayout,
-//    insetForSectionAt section: Int
-//  ) -> UIEdgeInsets {
-//    return sectionInsets
-//  }
-//
-//  // 4
-//  func collectionView(
-//    _ collectionView: UICollectionView,
-//    layout collectionViewLayout: UICollectionViewLayout,
-//    minimumLineSpacingForSectionAt section: Int
-//  ) -> CGFloat {
-//    return sectionInsets.left
-//  }
-//}
+extension PlantsCollectionViewController: PlantWasEditedDelegate {
+    func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?) {
+        plants[indexPath.row] = newInfoPlant ?? plants[indexPath.row]
+        plantsCollectionView.reloadData()
+    }
+}

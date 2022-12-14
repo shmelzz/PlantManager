@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PlantWasEditedDelegate: AnyObject {
+    func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?)
+}
+
 final class PlantInfoView: UIViewController {
     
     var plant: Plant?
@@ -16,6 +20,8 @@ final class PlantInfoView: UIViewController {
     private let timelineButton = UIButton()
     private let aboutInfoView = AboutPlantInfoView()
     
+    weak var delegate: PlantWasEditedDelegate?
+    var plantIndexPath: IndexPath?
     
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
@@ -27,16 +33,13 @@ final class PlantInfoView: UIViewController {
             action: #selector(settingsTapped)
         )
         
-        navigationItem.title = plant?.name
-        // navigationBar.tintColor = .black
-        
         setupView()
         plantImage.image = UIImage(named: "plant_img") ?? UIImage()
+        updateTitle()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     private func setupView() {
@@ -96,7 +99,16 @@ final class PlantInfoView: UIViewController {
     
     @objc
     private func settingsTapped() {
-        
+        let settingsView = PlantSettingsViewController()
+        settingsView.plant = self.plant
+        settingsView.delegate = self
+        let nav = UINavigationController(rootViewController: settingsView)
+        if let sheetController = nav.sheetPresentationController {
+            sheetController.detents = [.medium(), .large()]
+            sheetController.preferredCornerRadius = 24
+            sheetController.prefersGrabberVisible = true
+        }
+        present(nav, animated: true, completion: nil)
     }
     
     @objc
@@ -126,6 +138,20 @@ final class PlantInfoView: UIViewController {
                                                  place: Room(name: "none"),
                                                  purchaseDay: Date(),
                                                  wateringSpan: 0)
+    }
+    
+    private func updateTitle() {
+        navigationItem.title = plant?.name
+    }
+}
+
+
+extension PlantInfoView: EditPlantDelegate {
+    func plantWasEdited(editedPlant: Plant?) {
+        self.plant = editedPlant
+        aboutInfoView.updatePlantInfo(newInfo: self.plant)
+        updateTitle()
+        delegate?.plantWithIndexWasEdited(indexPath: plantIndexPath ?? IndexPath(), newInfoPlant: self.plant)
     }
 }
 

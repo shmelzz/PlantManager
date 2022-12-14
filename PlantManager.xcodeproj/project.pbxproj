@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */; };
 		CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */; };
+		CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */; };
 		CC22B27A2948B1F200CEDEE5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22B2792948B1F200CEDEE5 /* Utils.swift */; };
 		CC22B27C294912FE00CEDEE5 /* AboutPlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */; };
 		CC34637629432CD700E07172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34637529432CD700E07172 /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantViewController.swift; sourceTree = "<group>"; };
 		CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
+		CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSettingsViewController.swift; sourceTree = "<group>"; };
 		CC22B2792948B1F200CEDEE5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPlantInfoView.swift; sourceTree = "<group>"; };
 		CC34637229432CD700E07172 /* PlantManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
 				CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */,
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
+				CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
+				CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */,
 				CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
 				CCFE218C2947A46200C4BBB4 /* RoomsCollectionView.swift in Sources */,
