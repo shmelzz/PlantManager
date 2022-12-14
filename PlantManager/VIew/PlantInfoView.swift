@@ -126,6 +126,8 @@ final class PlantInfoView: UIViewController {
         aboutButton.changeSelectedButtonView(title: "About")
         careButton.changeNotSelectedButtonView(title: "Care")
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
+        
+        aboutInfoView.isHidden = false
     }
     
     @objc
@@ -133,6 +135,8 @@ final class PlantInfoView: UIViewController {
         careButton.changeSelectedButtonView(title: "Care")
         aboutButton.changeNotSelectedButtonView(title: "About")
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
+        
+        aboutInfoView.isHidden = true
     }
     
     @objc
@@ -140,6 +144,8 @@ final class PlantInfoView: UIViewController {
         timelineButton.changeSelectedButtonView(title: "Timeline")
         careButton.changeNotSelectedButtonView(title: "Care")
         aboutButton.changeNotSelectedButtonView(title: "About")
+        
+        aboutInfoView.isHidden = true
     }
     
     private func setupAboutView() {

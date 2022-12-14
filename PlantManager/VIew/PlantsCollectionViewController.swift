@@ -342,6 +342,8 @@ extension PlantsCollectionViewController {
         plant.setValue(plantToSave.wateringSpan, forKey: "wateringSpan")
         plant.setValue(plantToSave.plantType.title, forKey: "plantType")
         plant.setValue(plantToSave.purchaseDay, forKey: "purchaseDay")
+        //
+        plant.setValue(plantToSave.image?.toData as NSData?, forKey: "image")
         
         do {
             try managedContext.save()
@@ -374,7 +376,13 @@ extension PlantsCollectionViewController {
             let plantType = PlantType(title: obj.value(forKey: "plantType") as? String ?? "-")
             let date = obj.value(forKey: "purchaseDay") as? Date ?? Date()
             let wateringSpan = obj.value(forKey: "wateringSpan") as? Int ?? 0
-            let plant = Plant(name: name, plantType: plantType, place: place, purchaseDay: date, wateringSpan: wateringSpan)
+            let image = UIImage(data: obj.value(forKey: "image") as? Data ?? Data())
+            let plant = Plant(name: name,
+                              plantType: plantType,
+                              place: place,
+                              purchaseDay: date,
+                              wateringSpan: wateringSpan,
+                              image: image)
             plants.append(plant)
         }
     }

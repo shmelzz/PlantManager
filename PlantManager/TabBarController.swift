@@ -35,8 +35,6 @@ final class TabBarController: UITabBarController {
                 return "magnifyingglass"
             }
         }
-        
-        
     }
     
     override func viewDidLoad() {
