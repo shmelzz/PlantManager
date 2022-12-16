@@ -15,6 +15,7 @@ final class AboutPlantInfoView: UIStackView {
     private let purchaseLabel = UILabel()
     private let wateringSpanLabel = UILabel()
     
+    // MARK: - Init
     init(plant: Plant? = nil) {
         self.plant = plant
         super.init(frame: .zero)
@@ -48,6 +49,7 @@ final class AboutPlantInfoView: UIStackView {
         configureLabels()
     }
     
+    // MARK: - view setup
     private func configureLabels(){
         typeLabel.text = "Plant type: \(plant?.plantType.title ?? "")"
         placeLabel.text = "Place: \(plant?.place.name ?? "")"
@@ -57,7 +59,6 @@ final class AboutPlantInfoView: UIStackView {
     
     private func setupView() {
         configureLabels()
-        
         self.addArrangedSubview(typeLabel)
         self.addArrangedSubview(placeLabel)
         self.addArrangedSubview(purchaseLabel)

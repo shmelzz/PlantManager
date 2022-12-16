@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Protocols
 protocol PlantWasEditedDelegate: AnyObject {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?)
 }
@@ -19,6 +20,7 @@ protocol PlantWasDeletedSettingsDelegate: AnyObject {
     func plantWasDeleted()
 }
 
+// MARK: - Class
 final class PlantInfoView: UIViewController {
     
     var plant: Plant?
@@ -32,6 +34,7 @@ final class PlantInfoView: UIViewController {
     weak var deleteDelegate: PlantWasDeletedDelegate?
     var plantIndexPath: IndexPath?
     
+    // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         view.backgroundColor = .white
         
@@ -50,6 +53,7 @@ final class PlantInfoView: UIViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - View setup
     private func setupView() {
         var buttonConfig = Utils.configButton()
         buttonConfig.title = "About"
@@ -105,7 +109,19 @@ final class PlantInfoView: UIViewController {
         plantImage.image = plant?.image ?? UIImage(named: "plant_img")
     }
     
+    private func setupAboutView() {
+        aboutInfoView.plantInfo = plant ?? Plant(name: "none",
+                                                 plantType: PlantType(title: "none"),
+                                                 place: Room(name: "none"),
+                                                 purchaseDay: Date(),
+                                                 wateringSpan: 0)
+    }
     
+    private func updateTitle() {
+        navigationItem.title = plant?.name
+    }
+    
+    // MARK: - Actions
     @objc
     private func settingsTapped() {
         let settingsView = PlantSettingsViewController()
@@ -147,21 +163,9 @@ final class PlantInfoView: UIViewController {
         
         aboutInfoView.isHidden = true
     }
-    
-    private func setupAboutView() {
-        aboutInfoView.plantInfo = plant ?? Plant(name: "none",
-                                                 plantType: PlantType(title: "none"),
-                                                 place: Room(name: "none"),
-                                                 purchaseDay: Date(),
-                                                 wateringSpan: 0)
-    }
-    
-    private func updateTitle() {
-        navigationItem.title = plant?.name
-    }
 }
 
-
+// MARK: - EditPlantDelegate
 extension PlantInfoView: EditPlantDelegate {
     func plantWasEdited(editedPlant: Plant?) {
         self.plant = editedPlant
@@ -171,6 +175,7 @@ extension PlantInfoView: EditPlantDelegate {
     }
 }
 
+// MARK: - PlantWasDeletedDelegate
 extension PlantInfoView: PlantWasDeletedDelegate {
     func plantWithIndexWasDeleted(indexPath: IndexPath) {
         deleteDelegate?.plantWithIndexWasDeleted(indexPath: indexPath)
@@ -178,12 +183,14 @@ extension PlantInfoView: PlantWasDeletedDelegate {
     }
 }
 
+// MARK: - PlantWasDeletedSettingsDelegate
 extension PlantInfoView: PlantWasDeletedSettingsDelegate {
     func plantWasDeleted() {
         plantWithIndexWasDeleted(indexPath: plantIndexPath ?? IndexPath())
     }
 }
 
+// MARK: - extensons
 extension UIButton {
     
     public func changeNotSelectedButtonView(title: String) {

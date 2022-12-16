@@ -24,7 +24,6 @@
 		CC34639C29435EE900E07172 /* PlantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639B29435EE900E07172 /* PlantType.swift */; };
 		CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */; };
 		CC34B52F294A6C9900AAEA05 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */; };
-		CCFE218C2947A46200C4BBB4 /* RoomsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218B2947A46200C4BBB4 /* RoomsCollectionView.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
 		CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +48,6 @@
 		CC34639B29435EE900E07172 /* PlantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantType.swift; sourceTree = "<group>"; };
 		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		CCFE218B2947A46200C4BBB4 /* RoomsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsCollectionView.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
 		CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,7 +115,6 @@
 				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
 				CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */,
 				CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */,
-				CCFE218B2947A46200C4BBB4 /* RoomsCollectionView.swift */,
 				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
 				CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */,
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
@@ -226,7 +223,6 @@
 				CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */,
 				CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
-				CCFE218C2947A46200C4BBB4 /* RoomsCollectionView.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
 				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
 			);

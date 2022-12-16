@@ -11,8 +11,6 @@ final class RoomsTableViewCell: UITableViewCell {
     
     private let roomLabel = UILabel()
     private let plantsCountLabel = UILabel()
-    // private let arrow = UIImageView()
-    
     
     var cellText: String {
         get {
@@ -78,12 +76,5 @@ final class RoomsTableViewCell: UITableViewCell {
         plantsCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         plantsCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8).isActive = true
         plantsCountLabel.topAnchor.constraint(equalTo: roomLabel.bottomAnchor, constant: 8).isActive = true
-        
-//        contentView.addSubview(arrow)
-//        arrow.translatesAutoresizingMaskIntoConstraints = false
-//        arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
-//        arrow.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
-//        arrow.image = UIImage(systemName: "arrow")
-//        arrow.tintColor = .black
     }
 }

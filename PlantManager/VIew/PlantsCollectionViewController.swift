@@ -228,10 +228,10 @@ final class PlantsCollectionViewController: UIViewController {
     private func getRooms() {
         var roomsDictionary: [String: Int] = [:]
         for plant in plants {
-            if roomsDictionary.keys.contains(plant.place.name) {
-                roomsDictionary[plant.place.name]!+=1
+            if roomsDictionary.keys.contains(plant.place.name.lowercased().capitalized) {
+                roomsDictionary[plant.place.name.lowercased().capitalized]!+=1
             } else {
-                roomsDictionary[plant.place.name] = 1
+                roomsDictionary[plant.place.name.lowercased().capitalized] = 1
             }
         }
         
@@ -408,6 +408,7 @@ extension PlantsCollectionViewController {
         plant.setValue(plantToEdit.wateringSpan, forKey: "wateringSpan")
         plant.setValue(plantToEdit.plantType.title, forKey: "plantType")
         plant.setValue(plantToEdit.purchaseDay, forKey: "purchaseDay")
+        plant.setValue(plantToEdit.image?.toData as NSData?, forKey: "image")
         
         do {
             try managedContext.save()

@@ -81,6 +81,7 @@ final class PlantSettingsViewController: UIViewController, AddView {
         setupNavBar()
     }
     
+    // MARK: - setup view
     private func setupCurrentSettings() {
         plantNameInput.text = plant?.name
         plantTypeInput.text = plant?.plantType.title
@@ -144,15 +145,16 @@ final class PlantSettingsViewController: UIViewController, AddView {
         setupCurrentSettings()
     }
     
-    @objc func wateringSpanValueChanged() {
-        wateringSpanLabel.text = "Watering span:    \(Int(wateringSpanStepper.value)) days"
-     }
-    
     private func setupNavBar() {
         self.title = "Settings"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
     }
+    
+    // MARK: - Actions
+    @objc func wateringSpanValueChanged() {
+        wateringSpanLabel.text = "Watering span:    \(Int(wateringSpanStepper.value)) days"
+     }
     
     @objc
     func deleteButtonTapped() {
@@ -175,7 +177,8 @@ final class PlantSettingsViewController: UIViewController, AddView {
                              plantType: PlantType(title: type),
                              place: room,
                              purchaseDay: date,
-                             wateringSpan: Int(wateringSpanStepper.value))
+                             wateringSpan: Int(wateringSpanStepper.value),
+                             image: plant?.image)
         self.plant = newPlant
         delegate?.plantWasEdited(editedPlant: newPlant)
         self.dismiss(animated: true)

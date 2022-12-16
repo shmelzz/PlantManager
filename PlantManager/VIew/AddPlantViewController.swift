@@ -81,6 +81,7 @@ final class AddPlantViewController: UIViewController, AddView {
     
     private let plantImage = UIImageView()
     
+    // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupView()
@@ -92,6 +93,7 @@ final class AddPlantViewController: UIViewController, AddView {
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
+    // MARK: - View setup
     private func setupView() {
         view.backgroundColor = .white
         
@@ -112,7 +114,6 @@ final class AddPlantViewController: UIViewController, AddView {
         roomNameInput.topAnchor.constraint(equalTo: plantTypeInput.bottomAnchor, constant: 8).isActive = true
         roomNameInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         roomNameInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
-        
         
         view.addSubview(purchaseDateInput)
         purchaseDateInput.translatesAutoresizingMaskIntoConstraints = false
@@ -154,6 +155,13 @@ final class AddPlantViewController: UIViewController, AddView {
         addPhotoButton.addTarget(self, action: #selector(showImagePicker), for: .touchUpInside)
     }
     
+    private func setupNavBar() {
+        self.title = "Add new plant"
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
+    }
+    
+    // MARK: - Actions
     @objc
     private func wateringSpanValueChanged() {
         wateringSpanLabel.text = "Watering span:    \(Int(wateringSpanStepper.value)) days"
@@ -162,12 +170,6 @@ final class AddPlantViewController: UIViewController, AddView {
     @objc
     private func showImagePicker() {
         self.imagePicker?.present(from: self.view)
-    }
-    
-    private func setupNavBar() {
-        self.title = "Add new plant"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
     }
     
     @objc
@@ -191,6 +193,7 @@ final class AddPlantViewController: UIViewController, AddView {
     }
 }
 
+// MARK: - ImagePickerDelegate
 extension AddPlantViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
