@@ -44,7 +44,14 @@ final class RoomsTableViewCell: UITableViewCell {
     // MARK: - Cell config
     public func configure(count: Int, roomName: String) {
         roomLabel.text = roomName
-        plantsCountLabel.text = "\(count) plants"
+        switch count {
+        case 0:
+            plantsCountLabel.text = "There is no plants yet"
+        case 1:
+            plantsCountLabel.text = "\(count) plant"
+        default:
+            plantsCountLabel.text = "\(count) plants"
+        }
     }
     
     // MARK: - Configuration
