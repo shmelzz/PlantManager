@@ -9,31 +9,18 @@ import UIKit
 
 final class RoomsTableViewCell: UITableViewCell {
     
-    private let roomLabel = UILabel()
-    private let plantsCountLabel = UILabel()
+    private lazy var roomLabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 18)
+        return label
+    }()
     
-    var cellText: String {
-        get {
-            roomLabel.text ?? ""
-        }
-        set {
-            roomLabel.text = newValue
-        }
-    }
-    
-    var plantNameText: String {
-        get {
-            plantsCountLabel.text ?? ""
-        }
-        set {
-            plantsCountLabel.text = newValue
-        }
-    }
+    private lazy var plantsCountLabel = UILabel()
     
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
+        selectionStyle = .none
         configureUI()
     }
     
@@ -56,8 +43,8 @@ final class RoomsTableViewCell: UITableViewCell {
     
     // MARK: - Cell config
     public func configure(count: Int, roomName: String) {
-        cellText = roomName
-        plantNameText = "\(count) plants"
+        roomLabel.text = roomName
+        plantsCountLabel.text = "\(count) plants"
     }
     
     // MARK: - Configuration

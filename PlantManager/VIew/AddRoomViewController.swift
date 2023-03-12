@@ -12,6 +12,7 @@ final class AddRoomViewController: UIViewController, AddView {
     private var roomNameInput: UITextField = {
         let input = UITextField()
         input.placeholder = "room name"
+        input.borderStyle = .roundedRect
         return input
     }()
     
@@ -39,7 +40,7 @@ final class AddRoomViewController: UIViewController, AddView {
     
     @objc
     func cancelAdd() {
-        
+        dismiss(animated: true)
     }
     
     @objc

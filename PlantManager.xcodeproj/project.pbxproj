@@ -24,6 +24,10 @@
 		CC34639C29435EE900E07172 /* PlantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639B29435EE900E07172 /* PlantType.swift */; };
 		CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */; };
 		CC34B52F294A6C9900AAEA05 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */; };
+		CC45E31629BDF0C800962B8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC45E31529BDF0C800962B8D /* GoogleService-Info.plist */; };
+		CC45E31929BDF4B300962B8D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31829BDF4B300962B8D /* FirebaseAnalytics */; };
+		CC45E31B29BDF4B300962B8D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31A29BDF4B300962B8D /* FirebaseAuth */; };
+		CC45E31D29BDF4B300962B8D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31C29BDF4B300962B8D /* FirebaseDatabase */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
 		CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */; };
 /* End PBXBuildFile section */
@@ -48,6 +52,7 @@
 		CC34639B29435EE900E07172 /* PlantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantType.swift; sourceTree = "<group>"; };
 		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		CC45E31529BDF0C800962B8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
 		CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC45E31D29BDF4B300962B8D /* FirebaseDatabase in Frameworks */,
+				CC45E31929BDF4B300962B8D /* FirebaseAnalytics in Frameworks */,
+				CC45E31B29BDF4B300962B8D /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,10 +104,10 @@
 				CC34638D2943390B00E07172 /* Model */,
 				CC34638C294338FE00E07172 /* VIew */,
 				CC34637529432CD700E07172 /* AppDelegate.swift */,
-				CC3463992943429900E07172 /* TabBarController.swift */,
 				CC34637729432CD700E07172 /* SceneDelegate.swift */,
 				CC34638129432CD800E07172 /* Assets.xcassets */,
 				CC34638329432CD800E07172 /* LaunchScreen.storyboard */,
+				CC45E31529BDF0C800962B8D /* GoogleService-Info.plist */,
 				CC34638629432CD800E07172 /* Info.plist */,
 				CC34637E29432CD700E07172 /* PlantManager.xcdatamodeld */,
 			);
@@ -134,6 +142,7 @@
 		CC34638E2943391300E07172 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CC3463992943429900E07172 /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,6 +163,11 @@
 			dependencies = (
 			);
 			name = PlantManager;
+			packageProductDependencies = (
+				CC45E31829BDF4B300962B8D /* FirebaseAnalytics */,
+				CC45E31A29BDF4B300962B8D /* FirebaseAuth */,
+				CC45E31C29BDF4B300962B8D /* FirebaseDatabase */,
+			);
 			productName = PlantManager;
 			productReference = CC34637229432CD700E07172 /* PlantManager.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +196,9 @@
 				Base,
 			);
 			mainGroup = CC34636929432CD700E07172;
+			packageReferences = (
+				CC45E31729BDF4B300962B8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CC34637329432CD700E07172 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,6 +215,7 @@
 			files = (
 				CC34638529432CD800E07172 /* LaunchScreen.storyboard in Resources */,
 				CC34638229432CD800E07172 /* Assets.xcassets in Resources */,
+				CC45E31629BDF0C800962B8D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,12 +383,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantManager/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures of plants.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to select pictures of plants from gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -397,12 +416,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantManager/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants to take pictures of plants.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to select pictures of plants from gallery.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,6 +462,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CC45E31729BDF4B300962B8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC45E31829BDF4B300962B8D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC45E31729BDF4B300962B8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		CC45E31A29BDF4B300962B8D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC45E31729BDF4B300962B8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CC45E31C29BDF4B300962B8D /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC45E31729BDF4B300962B8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		CC34637E29432CD700E07172 /* PlantManager.xcdatamodeld */ = {

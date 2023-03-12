@@ -59,9 +59,9 @@ final class AboutPlantInfoView: UIStackView {
     
     private func setupView() {
         configureLabels()
-        self.addArrangedSubview(typeLabel)
-        self.addArrangedSubview(placeLabel)
-        self.addArrangedSubview(purchaseLabel)
-        self.addArrangedSubview(wateringSpanLabel)
+        addArrangedSubview(typeLabel)
+        addArrangedSubview(placeLabel)
+        addArrangedSubview(purchaseLabel)
+        addArrangedSubview(wateringSpanLabel)
     }
 }
