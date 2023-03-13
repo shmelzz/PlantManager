@@ -28,6 +28,8 @@
 		CC45E31929BDF4B300962B8D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31829BDF4B300962B8D /* FirebaseAnalytics */; };
 		CC45E31B29BDF4B300962B8D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31A29BDF4B300962B8D /* FirebaseAuth */; };
 		CC45E31D29BDF4B300962B8D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31C29BDF4B300962B8D /* FirebaseDatabase */; };
+		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
+		CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
 		CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		CC45E31529BDF0C800962B8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
+		CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTimelineView.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
 		CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +130,8 @@
 				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
 				CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */,
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
+				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
+				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
 				CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */,
 			);
 			path = VIew;
@@ -228,6 +234,7 @@
 			files = (
 				CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */,
 				CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */,
+				CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */,
 				CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */,
 				CC34B52F294A6C9900AAEA05 /* ImagePicker.swift in Sources */,
 				CC34639A2943429900E07172 /* TabBarController.swift in Sources */,
@@ -235,6 +242,7 @@
 				CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */,
 				CC22B27A2948B1F200CEDEE5 /* Utils.swift in Sources */,
 				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
+				CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */,
 				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,

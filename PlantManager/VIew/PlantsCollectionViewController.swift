@@ -16,9 +16,9 @@ final class PlantsCollectionViewController: UIViewController {
         var count: Int
     }
     
-    var rooms: [RoomCount] = []
-    var plantsCollection: [NSManagedObject] = []
-    var plants: [Plant] = []
+    private var rooms: [RoomCount] = []
+    private var plantsCollection: [NSManagedObject] = []
+    private var plants: [Plant] = []
     
     private let reuseIdentifier = "PlantCell"
     private let reuseIdentifierRoom = "RoomCell"
@@ -46,27 +46,27 @@ final class PlantsCollectionViewController: UIViewController {
     
     private var plantsCollectionView: UICollectionView
     
-    private let roomsCollectionView = UITableView(frame: .zero, style: .insetGrouped)
+    private lazy var roomsTableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    private let plantsUILabel: UILabel = {
+    private lazy var plantsUILabel: UILabel = {
         var label = UILabel()
         label.text = "Plants"
         return label
     }()
     
-    private let roomsUILabel: UILabel = {
+    private lazy var roomsUILabel: UILabel = {
         var label = UILabel()
         label.text = "Rooms"
         return label
     }()
     
-    private let toggle: UISwitch = {
+    private lazy var toggle: UISwitch = {
         var toggle = UISwitch()
         toggle.onTintColor = UIColor(red: 0.18, green: 0.45, blue: 0.20, alpha: 0.55)
         return toggle
     }()
     
-    private let addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         var button = UIButton()
         var config = UIButton.Configuration.filled()
         config.titlePadding = 2.0
@@ -87,7 +87,7 @@ final class PlantsCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "My Plants"
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
         
         view.addSubview(plantsUILabel)
         plantsUILabel.translatesAutoresizingMaskIntoConstraints = false
@@ -118,23 +118,24 @@ final class PlantsCollectionViewController: UIViewController {
         plantsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         plantsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         plantsCollectionView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 16).isActive = true
-        plantsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        plantsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         plantsCollectionView.dataSource = self
         
-        view.addSubview(roomsCollectionView)
-        roomsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        roomsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        roomsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        roomsCollectionView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 16).isActive = true
-        roomsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        roomsCollectionView.dataSource = self
-        roomsCollectionView.isHidden = true
+        view.addSubview(roomsTableView)
+        roomsTableView.translatesAutoresizingMaskIntoConstraints = false
+        roomsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        roomsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        roomsTableView.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 16).isActive = true
+        roomsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        roomsTableView.dataSource = self
+        roomsTableView.isHidden = true
+        roomsTableView.delegate = self
         
-        roomsCollectionView.register(RoomsTableViewCell.self, forCellReuseIdentifier: reuseIdentifierRoom)
-        roomsCollectionView.dataSource = self
-        roomsCollectionView.rowHeight = 80
+        roomsTableView.register(RoomsTableViewCell.self, forCellReuseIdentifier: reuseIdentifierRoom)
+        roomsTableView.dataSource = self
+        roomsTableView.rowHeight = 80
+        // roomsTableView.backgroundColor = .lightGray
         
-        roomsCollectionView.delegate = self
         plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         plantsCollectionView.delegate = self
         
@@ -212,17 +213,17 @@ final class PlantsCollectionViewController: UIViewController {
         plantsCollectionView.isUserInteractionEnabled = false
         plantsCollectionView.isHidden = true
         
-        roomsCollectionView.isUserInteractionEnabled = true
-        roomsCollectionView.isHidden = false
-        roomsCollectionView.reloadData()
+        roomsTableView.isUserInteractionEnabled = true
+        roomsTableView.isHidden = false
+        roomsTableView.reloadData()
     }
     
     func changeFromRoomsToPlants() {
         plantsCollectionView.isUserInteractionEnabled = true
         plantsCollectionView.isHidden = false
         
-        roomsCollectionView.isUserInteractionEnabled = false
-        roomsCollectionView.isHidden = true
+        roomsTableView.isUserInteractionEnabled = false
+        roomsTableView.isHidden = true
     }
     
     private func getRooms() {
@@ -277,7 +278,7 @@ extension PlantsCollectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = roomsCollectionView.dequeueReusableCell(withIdentifier: reuseIdentifierRoom, for: indexPath) as! RoomsTableViewCell
+        let cell = roomsTableView.dequeueReusableCell(withIdentifier: reuseIdentifierRoom, for: indexPath) as! RoomsTableViewCell
         cell.configure(count: rooms[indexPath.row].count,roomName: rooms[indexPath.row].name)
         return cell
     }
@@ -371,7 +372,6 @@ extension PlantsCollectionViewController {
         
         for obj in plantsCollection {
             let name = obj.value(forKey: "name") as? String ?? "-"
-            print(name)
             let place = Room(name: obj.value(forKey: "place") as? String ?? "-")
             let plantType = PlantType(title: obj.value(forKey: "plantType") as? String ?? "-")
             let date = obj.value(forKey: "purchaseDay") as? Date ?? Date()

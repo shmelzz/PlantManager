@@ -99,40 +99,40 @@ final class AddPlantViewController: UIViewController, AddView {
         
         view.addSubview(plantNameInput)
         plantNameInput.translatesAutoresizingMaskIntoConstraints = false
-        plantNameInput.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
+        plantNameInput.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         plantNameInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         plantNameInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(plantTypeInput)
         plantTypeInput.translatesAutoresizingMaskIntoConstraints = false
-        plantTypeInput.topAnchor.constraint(equalTo: plantNameInput.bottomAnchor, constant: 8).isActive = true
+        plantTypeInput.topAnchor.constraint(equalTo: plantNameInput.bottomAnchor, constant: 16).isActive = true
         plantTypeInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         plantTypeInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(roomNameInput)
         roomNameInput.translatesAutoresizingMaskIntoConstraints = false
-        roomNameInput.topAnchor.constraint(equalTo: plantTypeInput.bottomAnchor, constant: 8).isActive = true
+        roomNameInput.topAnchor.constraint(equalTo: plantTypeInput.bottomAnchor, constant: 16).isActive = true
         roomNameInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         roomNameInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(purchaseDateInput)
         purchaseDateInput.translatesAutoresizingMaskIntoConstraints = false
-        purchaseDateInput.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 8).isActive = true
+        purchaseDateInput.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 16).isActive = true
         purchaseDateInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(purchaseDateLabel)
         purchaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        purchaseDateLabel.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 10).isActive = true
+        purchaseDateLabel.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 16).isActive = true
         purchaseDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         
         view.addSubview(wateringSpanLabel)
         wateringSpanLabel.translatesAutoresizingMaskIntoConstraints = false
-        wateringSpanLabel.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 10).isActive = true
+        wateringSpanLabel.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 16).isActive = true
         wateringSpanLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         
         view.addSubview(wateringSpanStepper)
         wateringSpanStepper.translatesAutoresizingMaskIntoConstraints = false
-        wateringSpanStepper.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 8).isActive = true
+        wateringSpanStepper.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 16).isActive = true
         wateringSpanStepper.leadingAnchor.constraint(equalTo: wateringSpanLabel.trailingAnchor, constant: 12).isActive = true
         wateringSpanStepper.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
@@ -156,9 +156,9 @@ final class AddPlantViewController: UIViewController, AddView {
     }
     
     private func setupNavBar() {
-        self.title = "Add new plant"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
+        title = "Add new plant"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
     }
     
     // MARK: - Actions
@@ -169,12 +169,12 @@ final class AddPlantViewController: UIViewController, AddView {
     
     @objc
     private func showImagePicker() {
-        self.imagePicker?.present(from: self.view)
+        imagePicker?.present(from: self.view)
     }
     
     @objc
     func cancelAdd() {
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
     @objc
@@ -197,6 +197,6 @@ final class AddPlantViewController: UIViewController, AddView {
 extension AddPlantViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
-        self.plantImage.image = image
+        plantImage.image = image
     }
 }

@@ -10,20 +10,20 @@ import UIKit
 final class AboutPlantInfoView: UIStackView {
     
     private var plant: Plant?
-    private let typeLabel = UILabel()
-    private let placeLabel = UILabel()
-    private let purchaseLabel = UILabel()
-    private let wateringSpanLabel = UILabel()
+    private lazy var typeLabel = UILabel()
+    private lazy var placeLabel = UILabel()
+    private lazy var purchaseLabel = UILabel()
+    private lazy var wateringSpanLabel = UILabel()
     
     // MARK: - Init
     init(plant: Plant? = nil) {
         self.plant = plant
         super.init(frame: .zero)
         
-        self.alignment = .leading
-        self.distribution = .equalSpacing
-        self.axis = .vertical
-        self.spacing = 18
+        alignment = .leading
+        distribution = .equalSpacing
+        axis = .vertical
+        spacing = 24
     }
     
     required init(coder: NSCoder) {
@@ -45,7 +45,7 @@ final class AboutPlantInfoView: UIStackView {
     }
     
     func updatePlantInfo(newInfo: Plant?) {
-        self.plant = newInfo
+        plant = newInfo
         configureLabels()
     }
     

@@ -17,27 +17,27 @@ final class PlantSettingsViewController: UIViewController, AddView {
     weak var delegate: EditPlantDelegate?
     weak var deleteDelegate: PlantWasDeletedSettingsDelegate?
     
-    private var plantNameInput: UITextField = {
+    private lazy var plantNameInput: UITextField = {
         let input = UITextField()
         input.borderStyle = .roundedRect
         input.clearButtonMode = .whileEditing
         return input
     }()
     
-    private var plantTypeInput: UITextField = {
+    private lazy var plantTypeInput: UITextField = {
         let input = UITextField()
         input.borderStyle = .roundedRect
         input.clearButtonMode = .whileEditing
         return input
     }()
     
-    private var roomNameInput: UITextField = {
+    private lazy var roomNameInput: UITextField = {
         let input = UITextField()
         input.borderStyle = .roundedRect
         return input
     }()
     
-    private var wateringSpanStepper: UIStepper = {
+    private lazy var wateringSpanStepper: UIStepper = {
         let input = UIStepper()
         input.minimumValue = 1
         input.maximumValue = 50
@@ -45,12 +45,12 @@ final class PlantSettingsViewController: UIViewController, AddView {
         return input
     }()
     
-    private let wateringSpanLabel: UILabel = {
+    private lazy var wateringSpanLabel: UILabel = {
         let label = UILabel()
         return label
     }()
     
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
         config.titleAlignment = .center
@@ -61,7 +61,7 @@ final class PlantSettingsViewController: UIViewController, AddView {
         return button
     }()
     
-    private var purchaseDateInput: UIDatePicker = {
+    private lazy var purchaseDateInput: UIDatePicker = {
         let datePicker = UIDatePicker(frame: .zero)
         datePicker.datePickerMode = .date
         datePicker.timeZone = TimeZone.current
@@ -69,7 +69,7 @@ final class PlantSettingsViewController: UIViewController, AddView {
         return datePicker
     }()
     
-    private var purchaseDateLabel : UILabel = {
+    private lazy var purchaseDateLabel : UILabel = {
         let label = UILabel()
         label.text = "Purchase date:    "
         return label
@@ -96,41 +96,41 @@ final class PlantSettingsViewController: UIViewController, AddView {
         
         view.addSubview(plantNameInput)
         plantNameInput.translatesAutoresizingMaskIntoConstraints = false
-        plantNameInput.topAnchor.constraint(equalTo: view.topAnchor, constant: 48).isActive = true
+        plantNameInput.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         plantNameInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         plantNameInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(plantTypeInput)
         plantTypeInput.translatesAutoresizingMaskIntoConstraints = false
-        plantTypeInput.topAnchor.constraint(equalTo: plantNameInput.bottomAnchor, constant: 8).isActive = true
+        plantTypeInput.topAnchor.constraint(equalTo: plantNameInput.bottomAnchor, constant: 16).isActive = true
         plantTypeInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         plantTypeInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(roomNameInput)
         roomNameInput.translatesAutoresizingMaskIntoConstraints = false
-        roomNameInput.topAnchor.constraint(equalTo: plantTypeInput.bottomAnchor, constant: 8).isActive = true
+        roomNameInput.topAnchor.constraint(equalTo: plantTypeInput.bottomAnchor, constant: 16).isActive = true
         roomNameInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         roomNameInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         
         view.addSubview(purchaseDateInput)
         purchaseDateInput.translatesAutoresizingMaskIntoConstraints = false
-        purchaseDateInput.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 8).isActive = true
+        purchaseDateInput.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 16).isActive = true
         purchaseDateInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
         view.addSubview(purchaseDateLabel)
         purchaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-        purchaseDateLabel.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 10).isActive = true
+        purchaseDateLabel.topAnchor.constraint(equalTo: roomNameInput.bottomAnchor, constant: 16).isActive = true
         purchaseDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         
         view.addSubview(wateringSpanLabel)
         wateringSpanLabel.translatesAutoresizingMaskIntoConstraints = false
-        wateringSpanLabel.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 8).isActive = true
+        wateringSpanLabel.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 16).isActive = true
         wateringSpanLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
         
         view.addSubview(wateringSpanStepper)
         wateringSpanStepper.translatesAutoresizingMaskIntoConstraints = false
-        wateringSpanStepper.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 8).isActive = true
+        wateringSpanStepper.topAnchor.constraint(equalTo: purchaseDateInput.bottomAnchor, constant: 16).isActive = true
         wateringSpanStepper.leadingAnchor.constraint(equalTo: wateringSpanLabel.trailingAnchor, constant: 12).isActive = true
         wateringSpanStepper.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12).isActive = true
         
@@ -146,9 +146,9 @@ final class PlantSettingsViewController: UIViewController, AddView {
     }
     
     private func setupNavBar() {
-        self.title = "Settings"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
+        title = "Settings"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
     }
     
     // MARK: - Actions

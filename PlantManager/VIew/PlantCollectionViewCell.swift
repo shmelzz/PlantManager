@@ -10,7 +10,13 @@ import UIKit
 final class PlantCollectionViewCell: UICollectionViewCell {
     
     private let roomLabel = UILabel()
-    private let plantNameLabel = UILabel()
+    
+    private lazy var plantNameLabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
     private let plantImage = UIImageView()
     
 
@@ -45,7 +51,6 @@ final class PlantCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
-        backgroundColor = .clear
     }
 
     @available(*, unavailable)
@@ -61,32 +66,31 @@ final class PlantCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Configuration
     private func configureUI() {
-        contentView.layer.cornerRadius = 16
-        
         contentView.addSubview(plantImage)
         contentView.addSubview(plantNameLabel)
         contentView.addSubview(roomLabel)
         
         plantImage.translatesAutoresizingMaskIntoConstraints = false
-        plantImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        plantImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        plantImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        plantImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        plantImage.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        plantImage.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        plantImage.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        plantImage.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        plantImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75).isActive = true
         
         plantNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        plantNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        plantNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        plantNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
+        plantNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
         plantNameLabel.topAnchor.constraint(equalTo: plantImage.bottomAnchor, constant: 4).isActive = true
         plantNameLabel.numberOfLines = 0
         
         roomLabel.translatesAutoresizingMaskIntoConstraints = false
-        roomLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        roomLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        roomLabel.topAnchor.constraint(equalTo: plantNameLabel.bottomAnchor, constant: 4).isActive = true
-        roomLabel.numberOfLines = 0
+        NSLayoutConstraint.activate([
+            roomLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 24),
+            roomLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -24),
+            roomLabel.topAnchor.constraint(equalTo: plantNameLabel.bottomAnchor, constant: 4),
+        ])
         
         plantImage.contentMode = .scaleAspectFill
         plantImage.clipsToBounds = true
+        plantImage.layer.cornerRadius = 12      
     }
 }

@@ -24,11 +24,11 @@ protocol PlantWasDeletedSettingsDelegate: AnyObject {
 final class PlantInfoView: UIViewController {
     
     var plant: Plant?
-    private let plantImage = UIImageView()
-    private let aboutButton = UIButton()
-    private let careButton = UIButton()
-    private let timelineButton = UIButton()
-    private let aboutInfoView = AboutPlantInfoView()
+    private lazy var plantImage = UIImageView()
+    private lazy var aboutButton = UIButton()
+    private lazy var careButton = UIButton()
+    private lazy var timelineButton = UIButton()
+    private lazy var aboutInfoView = AboutPlantInfoView()
     
     weak var delegate: PlantWasEditedDelegate?
     weak var deleteDelegate: PlantWasDeletedDelegate?
@@ -168,7 +168,7 @@ final class PlantInfoView: UIViewController {
 // MARK: - EditPlantDelegate
 extension PlantInfoView: EditPlantDelegate {
     func plantWasEdited(editedPlant: Plant?) {
-        self.plant = editedPlant
+        plant = editedPlant
         aboutInfoView.updatePlantInfo(newInfo: self.plant)
         updateTitle()
         delegate?.plantWithIndexWasEdited(indexPath: plantIndexPath ?? IndexPath(), newInfoPlant: self.plant)
@@ -198,7 +198,7 @@ extension UIButton {
         buttonConfig.baseBackgroundColor = .clear
         buttonConfig.baseForegroundColor = .black
         buttonConfig.title = title
-        self.configuration = buttonConfig
+        configuration = buttonConfig
     }
     
     public func changeSelectedButtonView(title: String) {
@@ -206,6 +206,6 @@ extension UIButton {
         buttonConfig.baseBackgroundColor = UIColor(red: 0.18, green: 0.45, blue: 0.20, alpha: 0.55)
         buttonConfig.baseForegroundColor = .white
         buttonConfig.title = title
-        self.configuration = buttonConfig
+        configuration = buttonConfig
     }
 }
