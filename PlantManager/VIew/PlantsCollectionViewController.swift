@@ -82,6 +82,7 @@ final class PlantsCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         plantsCollectionView.reloadData()
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLoad() {

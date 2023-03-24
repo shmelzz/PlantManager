@@ -11,7 +11,7 @@ protocol AddPlantDelegate: AnyObject {
     func addNewPlantToCollection(newPlant: Plant)
 }
 
-final class AddPlantViewController: UIViewController, AddView {
+final class AddPlantViewController: UIViewController {
     
     weak var delegate: AddPlantDelegate?
     
@@ -189,7 +189,7 @@ final class AddPlantViewController: UIViewController, AddView {
                              wateringSpan: Int(wateringSpanStepper.value),
                              image: plantImage.image)
         delegate?.addNewPlantToCollection(newPlant: newPlant)
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
 

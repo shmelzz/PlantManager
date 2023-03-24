@@ -11,7 +11,7 @@ protocol EditPlantDelegate: AnyObject {
     func plantWasEdited(editedPlant: Plant?)
 }
 
-final class PlantSettingsViewController: UIViewController, AddView {
+final class PlantSettingsViewController: UIViewController {
     
     var plant: Plant?
     weak var delegate: EditPlantDelegate?

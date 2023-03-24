@@ -29,6 +29,7 @@ final class PlantInfoView: UIViewController {
     private lazy var careButton = UIButton()
     private lazy var timelineButton = UIButton()
     private lazy var aboutInfoView = AboutPlantInfoView()
+    private lazy var plantCareView = PlantCareView()
     
     weak var delegate: PlantWasEditedDelegate?
     weak var deleteDelegate: PlantWasDeletedDelegate?
@@ -45,12 +46,13 @@ final class PlantInfoView: UIViewController {
             action: #selector(settingsTapped)
         )
         
-        setupView()
         updateTitle()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - View setup
@@ -98,6 +100,16 @@ final class PlantInfoView: UIViewController {
         aboutInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         aboutInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         
+        view.addSubview(plantCareView)
+        plantCareView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            plantCareView.topAnchor.constraint(equalTo: aboutButton.bottomAnchor, constant: 16),
+            plantCareView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            plantCareView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            plantCareView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+        ])
+        plantCareView.isHidden = true
+        
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
         careButton.changeNotSelectedButtonView(title: "Care")
         
@@ -144,6 +156,7 @@ final class PlantInfoView: UIViewController {
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
         
         aboutInfoView.isHidden = false
+        plantCareView.isHidden = true
     }
     
     @objc
@@ -153,6 +166,7 @@ final class PlantInfoView: UIViewController {
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
         
         aboutInfoView.isHidden = true
+        plantCareView.isHidden = false
     }
     
     @objc
@@ -162,6 +176,7 @@ final class PlantInfoView: UIViewController {
         aboutButton.changeNotSelectedButtonView(title: "About")
         
         aboutInfoView.isHidden = true
+        plantCareView.isHidden = true
     }
 }
 

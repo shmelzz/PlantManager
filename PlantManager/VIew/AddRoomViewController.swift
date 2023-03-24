@@ -7,7 +7,13 @@
 
 import UIKit
 
-final class AddRoomViewController: UIViewController, AddView {
+protocol AddRoomDelegate: AnyObject {
+    func addNewRoom(newRoom: Room)
+}
+
+final class AddRoomViewController: UIViewController {
+    
+    weak var delegate: AddRoomDelegate?
     
     private var roomNameInput: UITextField = {
         let input = UITextField()
@@ -55,10 +61,9 @@ final class AddRoomViewController: UIViewController, AddView {
     
     @objc
     func doneAdd(){
-        
+        let name = roomNameInput.text ?? "-"
+        delegate?.addNewRoom(newRoom: Room(name: name))
+        dismiss(animated: true)
     }
 }
 
-protocol AddView: UIViewController {
-    
-}
