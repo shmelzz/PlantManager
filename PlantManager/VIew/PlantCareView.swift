@@ -21,11 +21,13 @@ final class PlantCareView: UIView {
     
     private lazy var alertLabel = {
         let label = UILabel()
-        label.textColor = .systemGray
+        label.textColor = .systemRed
+        label.text = "❗️ Needs Water ❗️"
         return label
     }()
     
     private lazy var tasksTableView = UITableView(frame: .zero)
+    private lazy var dataSource = DataSource(tasksTableView)
     
     public init() {
         super.init(frame: .zero)
@@ -50,6 +52,27 @@ final class PlantCareView: UIView {
             addTaskButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             addTaskButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
+        
+        addSubview(tasksTableView)
+        tasksTableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tasksTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tasksTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tasksTableView.topAnchor.constraint(equalTo: alertLabel.bottomAnchor, constant: 4),
+            tasksTableView.bottomAnchor.constraint(equalTo: addTaskButton.topAnchor, constant: -8)
+        ])
+        tasksTableView.delegate = self
+        tasksTableView.separatorStyle = .none
+        tasksTableView.register(RemindersTableViewCell.self, forCellReuseIdentifier: RemindersTableViewCell.remindersCellId)
+        setupDataSource()
+    }
+    
+    private func setupDataSource() {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        snapshot.appendSections(TaskSection.allCases)
+        snapshot.appendItems(tasks, toSection: .today)
+        dataSource.apply(snapshot)
     }
     
     @objc
@@ -62,5 +85,37 @@ final class PlantCareView: UIView {
             sheetController.prefersGrabberVisible = true
         }
         actionControllerPresenter?.present(nav, animated: true)
+    }
+}
+
+extension PlantCareView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - Data source
+final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task> {
+    
+    init(_ tableView: UITableView) {
+        super.init(tableView: tableView) { tableView, indexPath, itemIdentifier in
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: RemindersTableViewCell.remindersCellId,
+                for: indexPath
+            ) as? RemindersTableViewCell
+            cell?.configure(with: itemIdentifier)
+            return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case TaskSection.today.rawValue:
+            return "Today"
+        case TaskSection.upcoming.rawValue:
+            return "Upcoming"
+        default:
+            return nil
+        }
     }
 }

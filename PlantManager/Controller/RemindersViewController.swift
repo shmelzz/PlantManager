@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Section: Int, Hashable, CaseIterable {
+enum TaskSection: Int, Hashable, CaseIterable {
     case today = 0
     case upcoming
 }
@@ -20,8 +20,6 @@ final class RemindersViewController: UIViewController {
     
     private enum Constants {
         static let sectionHeight: CGFloat = 44
-        static let chatTitle = "Chat"
-        
     }
     
     override func viewDidLoad() {
@@ -49,7 +47,7 @@ final class RemindersViewController: UIViewController {
     private func setupDataSource() {
         var snapshot = dataSource.snapshot()
         snapshot.deleteAllItems()
-        snapshot.appendSections(Section.allCases)
+        snapshot.appendSections(TaskSection.allCases)
         snapshot.appendItems(tasks, toSection: .today)
         dataSource.apply(snapshot)
     }
@@ -74,7 +72,7 @@ extension RemindersViewController: UITableViewDelegate {
 }
 
 // MARK: - Data source
-final private class DataSource: UITableViewDiffableDataSource<Section, Task> {
+final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task> {
     
     init(_ tableView: UITableView) {
         super.init(tableView: tableView) { tableView, indexPath, itemIdentifier in
@@ -89,9 +87,9 @@ final private class DataSource: UITableViewDiffableDataSource<Section, Task> {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case Section.today.rawValue:
+        case TaskSection.today.rawValue:
             return "Today"
-        case Section.upcoming.rawValue:
+        case TaskSection.upcoming.rawValue:
             return "Upcoming"
         default:
             return nil
@@ -99,7 +97,7 @@ final private class DataSource: UITableViewDiffableDataSource<Section, Task> {
     }
 }
 
-private var tasks = [
+var tasks = [
     Task(name: "somethimg", reminder: Reminder(), taskType: .water),
     Task(name: "somethong2", reminder: Reminder(), taskType: .cut),
     Task(name: "somethimg3", reminder: Reminder(), taskType: .fertilize),
