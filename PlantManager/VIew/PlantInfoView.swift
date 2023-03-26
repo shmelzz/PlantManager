@@ -205,22 +205,3 @@ extension PlantInfoView: PlantWasDeletedSettingsDelegate {
     }
 }
 
-// MARK: - extensons
-extension UIButton {
-    
-    public func changeNotSelectedButtonView(title: String) {
-        var buttonConfig = Utils.configButton()
-        buttonConfig.baseBackgroundColor = .clear
-        buttonConfig.baseForegroundColor = .black
-        buttonConfig.title = title
-        configuration = buttonConfig
-    }
-    
-    public func changeSelectedButtonView(title: String) {
-        var buttonConfig = Utils.configButton()
-        buttonConfig.baseBackgroundColor = UIColor(red: 0.18, green: 0.45, blue: 0.20, alpha: 0.55)
-        buttonConfig.baseForegroundColor = .white
-        buttonConfig.title = title
-        configuration = buttonConfig
-    }
-}

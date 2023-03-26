@@ -31,9 +31,3 @@ struct Utils {
     }
 }
 
-extension UIImage {
-    
-    var toData: Data? {
-        return pngData()
-    }
-}

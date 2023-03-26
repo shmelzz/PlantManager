@@ -28,6 +28,7 @@
 		CC45E31929BDF4B300962B8D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31829BDF4B300962B8D /* FirebaseAnalytics */; };
 		CC45E31B29BDF4B300962B8D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31A29BDF4B300962B8D /* FirebaseAuth */; };
 		CC45E31D29BDF4B300962B8D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31C29BDF4B300962B8D /* FirebaseDatabase */; };
+		CC72AA9129D05BEA00926B7C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9029D05BEA00926B7C /* Extensions.swift */; };
 		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
 		CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
@@ -55,6 +56,7 @@
 		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		CC45E31529BDF0C800962B8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC72AA9029D05BEA00926B7C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
 		CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTimelineView.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		CC22B2782948B1E300CEDEE5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CC72AA8F29D05BD100926B7C /* Extensions */,
 				CC22B2792948B1F200CEDEE5 /* Utils.swift */,
 				CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */,
 			);
@@ -151,6 +154,14 @@
 				CC3463992943429900E07172 /* TabBarController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		CC72AA8F29D05BD100926B7C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC72AA9029D05BEA00926B7C /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +258,7 @@
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
 				CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */,
+				CC72AA9129D05BEA00926B7C /* Extensions.swift in Sources */,
 				CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
