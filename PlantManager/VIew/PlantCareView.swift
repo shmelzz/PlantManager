@@ -38,7 +38,7 @@ final class PlantCareView: UIView {
         addTaskButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             addTaskButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            addTaskButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            addTaskButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
     }
     
