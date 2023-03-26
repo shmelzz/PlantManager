@@ -33,6 +33,7 @@
 		CC72AA9629D070B500926B7C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9529D070B500926B7C /* Task.swift */; };
 		CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9729D070E900926B7C /* TaskManager.swift */; };
 		CC72AA9A29D0718F00926B7C /* TaskPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */; };
+		CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */; };
 		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
 		CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		CC72AA9529D070B500926B7C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CC72AA9729D070E900926B7C /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPersistanceManager.swift; sourceTree = "<group>"; };
+		CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTableViewCell.swift; sourceTree = "<group>"; };
 		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
 		CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTimelineView.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
 				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
 				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
+				CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
 				CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */,
 				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
+				CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
