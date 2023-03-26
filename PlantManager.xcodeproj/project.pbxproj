@@ -34,10 +34,11 @@
 		CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9729D070E900926B7C /* TaskManager.swift */; };
 		CC72AA9A29D0718F00926B7C /* TaskPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */; };
 		CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */; };
+		CC72AA9F29D099BF00926B7C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */; };
 		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
 		CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
-		CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */; };
+		CCFE21902947D4E100C4BBB4 /* PlantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,10 +68,11 @@
 		CC72AA9729D070E900926B7C /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPersistanceManager.swift; sourceTree = "<group>"; };
 		CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTableViewCell.swift; sourceTree = "<group>"; };
+		CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
 		CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTimelineView.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
-		CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoView.swift; sourceTree = "<group>"; };
+		CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +139,6 @@
 			children = (
 				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
 				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
-				CCFE218F2947D4E100C4BBB4 /* PlantInfoView.swift */,
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
 				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
 				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
@@ -165,6 +166,8 @@
 				CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */,
 				CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */,
 				CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */,
+				CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */,
+				CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -274,7 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCFE21902947D4E100C4BBB4 /* PlantInfoView.swift in Sources */,
+				CCFE21902947D4E100C4BBB4 /* PlantInfoViewController.swift in Sources */,
 				CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */,
 				CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */,
 				CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */,
@@ -299,6 +302,7 @@
 				CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */,
 				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
 				CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */,
+				CC72AA9F29D099BF00926B7C /* AddTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

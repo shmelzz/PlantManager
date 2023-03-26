@@ -21,7 +21,7 @@ protocol PlantWasDeletedSettingsDelegate: AnyObject {
 }
 
 // MARK: - Class
-final class PlantInfoView: UIViewController {
+final class PlantInfoViewController: UIViewController {
     
     var plant: Plant?
     private lazy var plantImage = UIImageView()
@@ -64,6 +64,7 @@ final class PlantInfoView: UIViewController {
         buttonConfig.title = "Care"
         careButton.configuration = buttonConfig
         
+        
         buttonConfig.title = "Timeline"
         timelineButton.configuration = buttonConfig
         
@@ -86,19 +87,20 @@ final class PlantInfoView: UIViewController {
         view.addSubview(timelineButton)
         timelineButton.translatesAutoresizingMaskIntoConstraints = false
         timelineButton.topAnchor.constraint(equalTo: plantImage.bottomAnchor, constant: 16).isActive = true
-        timelineButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+        timelineButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         
         view.addSubview(careButton)
         careButton.translatesAutoresizingMaskIntoConstraints = false
         careButton.topAnchor.constraint(equalTo: plantImage.bottomAnchor, constant: 16).isActive = true
         careButton.leadingAnchor.constraint(equalTo: aboutButton.trailingAnchor, constant: 28).isActive = true
-        careButton.trailingAnchor.constraint(equalTo: timelineButton.leadingAnchor, constant: -20).isActive = true
+        careButton.trailingAnchor.constraint(equalTo: timelineButton.leadingAnchor, constant: -10).isActive = true
         
         view.addSubview(aboutInfoView)
         aboutInfoView.translatesAutoresizingMaskIntoConstraints = false
         aboutInfoView.topAnchor.constraint(equalTo: aboutButton.bottomAnchor, constant: 16).isActive = true
         aboutInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         aboutInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        aboutInfoView.isHidden = true
         
         view.addSubview(plantCareView)
         plantCareView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,10 +110,10 @@ final class PlantInfoView: UIViewController {
             plantCareView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             plantCareView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
-        plantCareView.isHidden = true
+        plantCareView.actionControllerPresenter = self
         
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
-        careButton.changeNotSelectedButtonView(title: "Care")
+        aboutButton.changeNotSelectedButtonView(title: "Care")
         
         timelineButton.addTarget(self, action: #selector(timelineButtonTapped), for: .touchUpInside)
         careButton.addTarget(self, action: #selector(careButtonTapped), for: .touchUpInside)
@@ -181,7 +183,7 @@ final class PlantInfoView: UIViewController {
 }
 
 // MARK: - EditPlantDelegate
-extension PlantInfoView: EditPlantDelegate {
+extension PlantInfoViewController: EditPlantDelegate {
     func plantWasEdited(editedPlant: Plant?) {
         plant = editedPlant
         aboutInfoView.updatePlantInfo(newInfo: self.plant)
@@ -191,7 +193,7 @@ extension PlantInfoView: EditPlantDelegate {
 }
 
 // MARK: - PlantWasDeletedDelegate
-extension PlantInfoView: PlantWasDeletedDelegate {
+extension PlantInfoViewController: PlantWasDeletedDelegate {
     func plantWithIndexWasDeleted(indexPath: IndexPath) {
         deleteDelegate?.plantWithIndexWasDeleted(indexPath: indexPath)
         navigationController?.popViewController(animated: true)
@@ -199,7 +201,7 @@ extension PlantInfoView: PlantWasDeletedDelegate {
 }
 
 // MARK: - PlantWasDeletedSettingsDelegate
-extension PlantInfoView: PlantWasDeletedSettingsDelegate {
+extension PlantInfoViewController: PlantWasDeletedSettingsDelegate {
     func plantWasDeleted() {
         plantWithIndexWasDeleted(indexPath: plantIndexPath ?? IndexPath())
     }

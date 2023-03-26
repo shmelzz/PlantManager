@@ -31,11 +31,11 @@ class TaskManager: ObservableObject {
     self.tasks = taskPersistenceManager.loadTasks()
   }
 
-  func addNewTask(_ taskName: String, _ reminder: Reminder?) {
+    func addNewTask(_ taskName: String, _ reminder: Reminder?, taskType: PlantAction) {
     if let reminder = reminder {
-      save(task: Task(name: taskName, reminderEnabled: true, reminder: reminder))
+      save(task: Task(name: taskName, reminderEnabled: true, reminder: reminder, taskType: taskType))
     } else {
-      save(task: Task(name: taskName, reminderEnabled: false, reminder: Reminder()))
+      save(task: Task(name: taskName, reminderEnabled: false, reminder: Reminder(), taskType: taskType))
     }
   }
 

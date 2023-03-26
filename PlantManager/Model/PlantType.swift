@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-enum PlantAction {
-    case water
-    case cut
-    case fertilize
-    case repot
-}
-
 struct Room {
     let name: String
 }

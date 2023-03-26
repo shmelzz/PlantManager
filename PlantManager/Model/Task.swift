@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum PlantAction: Codable {
+    case water
+    case cut
+    case fertilize
+    case repot
+}
+
 struct Task: Identifiable, Codable, Hashable {
     
     func hash(into hasher: inout Hasher) {
@@ -22,6 +29,7 @@ struct Task: Identifiable, Codable, Hashable {
     var completed = false
     var reminderEnabled = false
     var reminder: Reminder
+    var taskType: PlantAction
 }
 
 enum ReminderType: Int, CaseIterable, Identifiable, Codable {

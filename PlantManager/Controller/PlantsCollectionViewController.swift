@@ -135,7 +135,6 @@ final class PlantsCollectionViewController: UIViewController {
         roomsTableView.register(RoomsTableViewCell.self, forCellReuseIdentifier: reuseIdentifierRoom)
         roomsTableView.dataSource = self
         roomsTableView.rowHeight = 80
-        // roomsTableView.backgroundColor = .lightGray
         
         plantsCollectionView.register(PlantCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         plantsCollectionView.delegate = self
@@ -248,7 +247,7 @@ final class PlantsCollectionViewController: UIViewController {
 // MARK: - UICollectionViewDelegate
 extension PlantsCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let plantInfoView = PlantInfoView()
+        let plantInfoView = PlantInfoViewController()
         plantInfoView.plant = plants[indexPath.row]
         plantInfoView.plantIndexPath = indexPath
         plantInfoView.delegate = self

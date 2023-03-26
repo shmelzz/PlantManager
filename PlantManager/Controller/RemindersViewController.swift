@@ -9,7 +9,7 @@ import UIKit
 
 enum Section: Int, Hashable, CaseIterable {
     case today = 0
-    case history
+    case upcoming
 }
 
 final class RemindersViewController: UIViewController {
@@ -91,8 +91,8 @@ final private class DataSource: UITableViewDiffableDataSource<Section, Task> {
         switch section {
         case Section.today.rawValue:
             return "Today"
-        case Section.history.rawValue:
-            return "HISTORY"
+        case Section.upcoming.rawValue:
+            return "Upcoming"
         default:
             return nil
         }
@@ -100,9 +100,9 @@ final private class DataSource: UITableViewDiffableDataSource<Section, Task> {
 }
 
 private var tasks = [
-    Task(name: "somethimg", reminder: Reminder()),
-    Task(name: "somethong2", reminder: Reminder()),
-    Task(name: "somethimg3", reminder: Reminder()),
-    Task(name: "somethimg4", reminder: Reminder()),
+    Task(name: "somethimg", reminder: Reminder(), taskType: .water),
+    Task(name: "somethong2", reminder: Reminder(), taskType: .cut),
+    Task(name: "somethimg3", reminder: Reminder(), taskType: .fertilize),
+    Task(name: "somethimg4", reminder: Reminder(), taskType: .repot),
 ]
 

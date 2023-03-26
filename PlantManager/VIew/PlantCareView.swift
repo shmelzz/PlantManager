@@ -9,6 +9,8 @@ import UIKit
 
 final class PlantCareView: UIView {
     
+    weak var actionControllerPresenter: PlantInfoViewController?
+    
     private lazy var addTaskButton = {
         let button = UIButton()
         button.setTitle("Add task to schedule", for: .normal)
@@ -19,6 +21,7 @@ final class PlantCareView: UIView {
     
     private lazy var alertLabel = {
         let label = UILabel()
+        label.textColor = .systemGray
         return label
     }()
     
@@ -34,6 +37,13 @@ final class PlantCareView: UIView {
     }
     
     private func setupView() {
+        addSubview(alertLabel)
+        alertLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            alertLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            alertLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 8)
+        ])
+        
         addSubview(addTaskButton)
         addTaskButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -44,9 +54,13 @@ final class PlantCareView: UIView {
     
     @objc
     private func addTaskButtonPressed() {
-//        let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-//            NSLog("The \"OK\" alert occured.")
-//        }))
+        let addTaskViewController = AddTaskViewController()
+        let nav = UINavigationController(rootViewController: addTaskViewController)
+        if let sheetController = nav.sheetPresentationController {
+            sheetController.detents = [.medium(), .large()]
+            sheetController.preferredCornerRadius = 24
+            sheetController.prefersGrabberVisible = true
+        }
+        actionControllerPresenter?.present(nav, animated: true)
     }
 }
