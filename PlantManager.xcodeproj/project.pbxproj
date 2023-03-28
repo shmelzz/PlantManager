@@ -137,12 +137,9 @@
 		CC34638C294338FE00E07172 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
-				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
-				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
-				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
-				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
-				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
-				CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */,
+				CCCB629529D3886600533EA4 /* Plants */,
+				CCCB629429D3885F00533EA4 /* Reminders */,
+				CCCB629329D3885800533EA4 /* Discover */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -159,15 +156,10 @@
 		CC34638E2943391300E07172 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CCCB629129D3881700533EA4 /* Discover */,
+				CCCB629029D3880900533EA4 /* Plants */,
+				CCCB628F29D387F200533EA4 /* Reminders */,
 				CC3463992943429900E07172 /* TabBarController.swift */,
-				CC34638F29433BAE00E07172 /* RemindersViewController.swift */,
-				CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */,
-				CC34639529433C4300E07172 /* DiscoverViewController.swift */,
-				CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */,
-				CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */,
-				CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */,
-				CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */,
-				CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -196,6 +188,78 @@
 				CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		CCCB628F29D387F200533EA4 /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				CC34638F29433BAE00E07172 /* RemindersViewController.swift */,
+				CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
+		CCCB629029D3880900533EA4 /* Plants */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB629229D3883600533EA4 /* Rooms */,
+				CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */,
+				CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */,
+				CC1D3B0B2947759700FE5EC5 /* AddPlantViewController.swift */,
+				CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */,
+			);
+			path = Plants;
+			sourceTree = "<group>";
+		};
+		CCCB629129D3881700533EA4 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				CC34639529433C4300E07172 /* DiscoverViewController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		CCCB629229D3883600533EA4 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */,
+			);
+			path = Rooms;
+			sourceTree = "<group>";
+		};
+		CCCB629329D3885800533EA4 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		CCCB629429D3885F00533EA4 /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
+		CCCB629529D3886600533EA4 /* Plants */ = {
+			isa = PBXGroup;
+			children = (
+				CCCB629629D3888200533EA4 /* PlantInfo */,
+				CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */,
+				CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */,
+			);
+			path = Plants;
+			sourceTree = "<group>";
+		};
+		CCCB629629D3888200533EA4 /* PlantInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
+				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
+				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
+			);
+			path = PlantInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

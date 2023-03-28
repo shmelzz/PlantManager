@@ -9,10 +9,6 @@ import UIKit
 
 final class RemindersTableViewCell: UITableViewCell {
     
-//    private enum TaskTypesImage {
-//        case
-//    }
-    
     static let remindersCellId = "remindersCell"
 
     private lazy var taskTitleLabel = {
@@ -52,6 +48,7 @@ final class RemindersTableViewCell: UITableViewCell {
         super.prepareForReuse()
         taskTitleLabel.text = ""
         checkButton.isSelected = false
+        taskTypeImageView.image = nil
     }
 
     // MARK: - Setup UI
@@ -97,7 +94,7 @@ final class RemindersTableViewCell: UITableViewCell {
     }
     
     func configure(with model: Task) {
-        taskTitleLabel.text = model.name
+        taskTitleLabel.text = model.plantName
         if model.completed {
             checkButton.isSelected = true
         }

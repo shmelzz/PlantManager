@@ -98,9 +98,9 @@ final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task>
 }
 
 var tasks = [
-    Task(name: "somethimg", reminder: Reminder(), taskType: .water),
-    Task(name: "somethong2", reminder: Reminder(), taskType: .cut),
-    Task(name: "somethimg3", reminder: Reminder(), taskType: .fertilize),
-    Task(name: "somethimg4", reminder: Reminder(), taskType: .repot),
+    Task(plantName: "somethimg", reminder: Reminder(), taskType: .water),
+    Task(plantName: "somethong2", reminder: Reminder(), taskType: .cut),
+    Task(plantName: "somethimg3", reminder: Reminder(), taskType: .fertilize),
+    Task(plantName: "somethimg4", reminder: Reminder(), taskType: .repot),
 ]
 

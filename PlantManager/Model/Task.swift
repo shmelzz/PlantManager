@@ -25,7 +25,7 @@ struct Task: Identifiable, Codable, Hashable {
     }
     
     var id = UUID().uuidString
-    var name: String
+    var plantName: String
     var completed = false
     var reminderEnabled = false
     var reminder: Reminder

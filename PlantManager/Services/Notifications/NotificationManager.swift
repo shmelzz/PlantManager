@@ -42,7 +42,7 @@ class NotificationManager: ObservableObject {
 
   func scheduleNotification(task: Task) {
     let content = UNMutableNotificationContent()
-    content.title = task.name
+    content.title = task.plantName
     content.body = "Gentle reminder for your task!"
     content.categoryIdentifier = "OrganizerPlusCategory"
     let taskData = try? JSONEncoder().encode(task)
