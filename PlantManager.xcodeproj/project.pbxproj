@@ -37,6 +37,8 @@
 		CC72AA9F29D099BF00926B7C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */; };
 		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
 		CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */; };
+		CCA57C6729D43C0000B80C73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA57C6629D43C0000B80C73 /* LoginViewController.swift */; };
+		CCA57C6929D4557F00B80C73 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA57C6829D4557F00B80C73 /* User.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
 		CCFE21902947D4E100C4BBB4 /* PlantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
 		CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTimelineView.swift; sourceTree = "<group>"; };
+		CCA57C6629D43C0000B80C73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CCA57C6829D4557F00B80C73 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
 		CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +153,7 @@
 			children = (
 				CC34639B29435EE900E07172 /* PlantType.swift */,
 				CC72AA9529D070B500926B7C /* Task.swift */,
+				CCA57C6829D4557F00B80C73 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 		CC34638E2943391300E07172 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CCA57C6529D43BEB00B80C73 /* Login */,
 				CCCB629129D3881700533EA4 /* Discover */,
 				CCCB629029D3880900533EA4 /* Plants */,
 				CCCB628F29D387F200533EA4 /* Reminders */,
@@ -188,6 +194,14 @@
 				CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		CCA57C6529D43BEB00B80C73 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CCA57C6629D43C0000B80C73 /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		CCCB628F29D387F200533EA4 /* Reminders */ = {
@@ -341,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA57C6729D43C0000B80C73 /* LoginViewController.swift in Sources */,
 				CCFE21902947D4E100C4BBB4 /* PlantInfoViewController.swift in Sources */,
 				CC1D3B0C2947759700FE5EC5 /* AddPlantViewController.swift in Sources */,
 				CC84CF7F29BF6AD100418230 /* PlantTimelineView.swift in Sources */,
@@ -360,6 +375,7 @@
 				CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */,
 				CC72AA9129D05BEA00926B7C /* Extensions.swift in Sources */,
 				CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */,
+				CCA57C6929D4557F00B80C73 /* User.swift in Sources */,
 				CC34637829432CD700E07172 /* SceneDelegate.swift in Sources */,
 				CC72AA9429D06C8200926B7C /* NotificationManager.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
