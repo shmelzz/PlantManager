@@ -56,8 +56,11 @@ class LoginViewController: UIViewController {
             if user == nil {
                 self.navigationController?.popToRootViewController(animated: true)
             } else {
-                self.enterEmail.text = nil
-                self.enterPassword.text = nil
+                let tabBarController = TabBarController()
+                tabBarController.selectedIndex = 1
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabBarController)
+//                self.enterEmail.text = nil
+//                self.enterPassword.text = nil
             }
         }
     }

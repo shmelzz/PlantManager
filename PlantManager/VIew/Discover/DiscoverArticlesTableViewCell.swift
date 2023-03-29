@@ -22,6 +22,8 @@ final class DiscoverArticlesTableViewCell: UITableViewCell {
     private lazy var articleImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 16
+        view.layer.masksToBounds = true
+        view.contentMode = .scaleAspectFill
         return view
     }()
 
@@ -47,15 +49,16 @@ final class DiscoverArticlesTableViewCell: UITableViewCell {
         contentView.addSubview(articleImageView)
         NSLayoutConstraint.activate([
             articleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            articleImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            articleImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            articleImageView.heightAnchor.constraint(equalToConstant: 150)
+            articleImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            articleImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
+            articleImageView.heightAnchor.constraint(equalToConstant: 150),
+            articleImageView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor)
         ])
 
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             titleLabel.topAnchor.constraint(equalTo: articleImageView.bottomAnchor, constant: 8),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])

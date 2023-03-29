@@ -19,9 +19,8 @@ final class DiscoverViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Discover"
         self.view.backgroundColor = .white
-        fetchArticles()
-        
         setupTableView()
+        fetchArticles()
     }
     
     private func setupTableView() {
@@ -36,7 +35,6 @@ final class DiscoverViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.register(DiscoverArticlesTableViewCell.self, forCellReuseIdentifier: DiscoverArticlesTableViewCell.articlesCellId)
-        setupDataSource()
     }
     
     private func setupDataSource() {
@@ -48,20 +46,18 @@ final class DiscoverViewController: UIViewController {
     }
     
     private func fetchArticles() {
-        ref.observeSingleEvent(of: .value, with: { snapshot in
-            var newItems: [Article] = []
+      ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
             for child in snapshot.children {
                 if
                     let snapshot = child as? DataSnapshot,
                     let groceryItem = Article(snapshot: snapshot) {
-                    newItems.append(groceryItem)
+                    self?.articles.append(groceryItem)
                 }
             }
-            self.articles = newItems
-        }) { error in
+          self?.setupDataSource()
+       }){ error in
             print(error.localizedDescription)
         }
-        print(articles)
     }
 }
 
