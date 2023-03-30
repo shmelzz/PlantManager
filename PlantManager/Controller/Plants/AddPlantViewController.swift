@@ -198,5 +198,10 @@ extension AddPlantViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         plantImage.image = image
+//        if let image = image {
+//            ImageStorageManager.shared.saveImage(image, path: "testfolder/test.png"){ _ in
+//                print("image was saved")
+//            }
+//        }
     }
 }
