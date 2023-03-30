@@ -68,7 +68,7 @@ final class DiscoverArticlesTableViewCell: UITableViewCell {
     func configure(with model: Article) {
         titleLabel.text = model.title
         // TODO update
-        ImageStorageManager.shared.getMainImage(path: "testfolder") { [weak self] image, error in
+        ImageStorageManager.shared.getImage(path: "test.png") { [weak self] image, error in
             if error == nil {
                 self?.articleImageView.image = image
             }

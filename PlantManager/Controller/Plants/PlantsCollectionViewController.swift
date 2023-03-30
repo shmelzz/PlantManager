@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
 
 
 final class PlantsCollectionViewController: UIViewController {
@@ -144,6 +145,53 @@ final class PlantsCollectionViewController: UIViewController {
         
         fetchData()
         getRooms()
+        setupNavBar()
+    }
+    
+    private func setupNavBar(){
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutButtonPressed)
+        )
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "info.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(infoButtonPressed)
+        )
+    }
+    
+    @objc
+    private func infoButtonPressed() {
+        let alert = UIAlertController(title: "Greenly", message: "This is an app description", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("OK", comment: "Default action"),
+            style: .default,
+            handler: { _ in }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func logoutButtonPressed() {
+        let alert = UIAlertController(title: "Sign out", message: "Do you want to sign out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Yes", comment: "Default action"),
+            style: .default,
+            handler: { _ in
+                do {
+                    try Auth.auth().signOut()
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(LoginViewController())
+                } catch let signOutError as NSError {
+                    print("Error signing out: %@", signOutError)
+                }
+            }))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("No", comment: "Default action"),
+            style: .default,
+            handler: { _ in }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     static func generatePlantsCollectionViewLayout() -> UICollectionViewLayout {
