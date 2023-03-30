@@ -68,6 +68,14 @@ extension DiscoverViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        openLink(indexPath.row)
+    }
+    
+    @objc
+    private func openLink(_ index: Int) {
+        if let url = articles[index].url {
+            navigationController?.pushViewController(WebViewController(url: url), animated: true)
+        }
     }
 }
 
