@@ -46,7 +46,7 @@ final class DiscoverViewController: UIViewController {
     }
     
     private func fetchArticles() {
-      ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+        ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
             for child in snapshot.children {
                 if
                     let snapshot = child as? DataSnapshot,
@@ -54,8 +54,8 @@ final class DiscoverViewController: UIViewController {
                     self?.articles.append(groceryItem)
                 }
             }
-          self?.setupDataSource()
-       }){ error in
+            self?.setupDataSource()
+        }){ error in
             print(error.localizedDescription)
         }
     }

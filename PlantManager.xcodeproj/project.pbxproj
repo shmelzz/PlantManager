@@ -45,6 +45,8 @@
 		CCA57C6B29D45BEB00B80C73 /* DiscoverArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA57C6A29D45BEB00B80C73 /* DiscoverArticlesTableViewCell.swift */; };
 		CCA57C6D29D45C8400B80C73 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA57C6C29D45C8400B80C73 /* Article.swift */; };
 		CCA57C6F29D467B300B80C73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA57C6E29D467B300B80C73 /* GoogleService-Info.plist */; };
+		CCDDC20F29D731C600A75581 /* PlantNoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDC20E29D731C600A75581 /* PlantNoteCollectionViewCell.swift */; };
+		CCDDC21129D731D800A75581 /* PlantPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDDC21029D731D800A75581 /* PlantPhotoCollectionViewCell.swift */; };
 		CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */; };
 		CCFE21902947D4E100C4BBB4 /* PlantInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +88,8 @@
 		CCA57C6A29D45BEB00B80C73 /* DiscoverArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		CCA57C6C29D45C8400B80C73 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		CCA57C6E29D467B300B80C73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCDDC20E29D731C600A75581 /* PlantNoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantNoteCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCDDC21029D731D800A75581 /* PlantPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCFE218D2947A77E00C4BBB4 /* RoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewCell.swift; sourceTree = "<group>"; };
 		CCFE218F2947D4E100C4BBB4 /* PlantInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -313,6 +317,8 @@
 				CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */,
 				CC84CF7E29BF6AD100418230 /* PlantTimelineView.swift */,
 				CC84CF7C29BF6A8500418230 /* PlantCareView.swift */,
+				CCDDC20E29D731C600A75581 /* PlantNoteCollectionViewCell.swift */,
+				CCDDC21029D731D800A75581 /* PlantPhotoCollectionViewCell.swift */,
 			);
 			path = PlantInfo;
 			sourceTree = "<group>";
@@ -413,7 +419,9 @@
 				CC22B27A2948B1F200CEDEE5 /* Utils.swift in Sources */,
 				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
 				CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */,
+				CCDDC20F29D731C600A75581 /* PlantNoteCollectionViewCell.swift in Sources */,
 				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
+				CCDDC21129D731D800A75581 /* PlantPhotoCollectionViewCell.swift in Sources */,
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
 				CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */,

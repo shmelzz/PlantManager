@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol AddPlantDelegate: AnyObject {
     func addNewPlantToCollection(newPlant: Plant)
@@ -189,6 +190,12 @@ final class AddPlantViewController: UIViewController {
                              wateringSpan: Int(wateringSpanStepper.value),
                              image: plantImage.image)
         delegate?.addNewPlantToCollection(newPlant: newPlant)
+        
+        var plantToSave = PlantSpec(name: name, plantType: type, place: room.name, wateringSpan: Int(wateringSpanStepper.value))
+        plantToSave.purchaseDay = date
+        
+        DatabaseManager.shared.postPlant(user: Auth.auth().currentUser?.uid ?? "dbjk;", plant: plantToSave)
+        
         dismiss(animated: true)
     }
 }
