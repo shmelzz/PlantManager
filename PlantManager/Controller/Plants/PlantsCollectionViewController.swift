@@ -352,7 +352,6 @@ extension PlantsCollectionViewController: AddPlantDelegate {
 extension PlantsCollectionViewController: PlantWasEditedDelegate {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?) {
         plants[indexPath.row] = newInfoPlant ?? plants[indexPath.row]
-        // self.editObject(index: indexPath.row, plantToEdit: newInfoPlant ?? plants[indexPath.row])
         plantsCollectionView.reloadData()
     }
 }
@@ -361,7 +360,6 @@ extension PlantsCollectionViewController: PlantWasEditedDelegate {
 extension PlantsCollectionViewController: PlantWasDeletedDelegate {
     func plantWithIndexWasDeleted(indexPath: IndexPath) {
         plants.remove(at: indexPath.row)
-        // self.deleteObject(index: indexPath.row)
         plantsCollectionView.reloadData()
     }
 }

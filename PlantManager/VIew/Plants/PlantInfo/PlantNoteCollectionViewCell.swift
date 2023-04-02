@@ -9,6 +9,8 @@ import UIKit
 
 final class PlantNoteCollectionViewCell: UICollectionViewCell {
     
+    static let reuseId = "PlantNoteCollectionViewCell"
+    
     private lazy var noteLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17)
@@ -26,6 +28,7 @@ final class PlantNoteCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
+        contentView.layer.cornerRadius = 16
     }
 
     @available(*, unavailable)
@@ -35,23 +38,23 @@ final class PlantNoteCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Configuration
     private func setupView() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemGray6
         
         contentView.addSubview(noteLabel)
         noteLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            noteLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            noteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            noteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            noteLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            noteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            noteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
         
         contentView.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: noteLabel.bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            dateLabel.topAnchor.constraint(equalTo: noteLabel.bottomAnchor, constant: 8),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
     }
     

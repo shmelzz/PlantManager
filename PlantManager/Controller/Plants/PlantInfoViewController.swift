@@ -31,11 +31,12 @@ final class PlantInfoViewController: UIViewController {
     private lazy var timelineButton = UIButton()
     private lazy var aboutInfoView = AboutPlantInfoView()
     private lazy var plantCareView = PlantCareView()
-    private lazy var timelineView = PlantTimelineView()
+    private lazy var timelineView = PlantTimelineView(plant: plant)
     
     weak var delegate: PlantWasEditedDelegate?
     weak var deleteDelegate: PlantWasDeletedDelegate?
     var plantIndexPath: IndexPath?
+    
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -85,7 +86,7 @@ final class PlantInfoViewController: UIViewController {
         plantImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         plantImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         plantImage.heightAnchor.constraint(equalToConstant: 240).isActive = true
-        
+        plantImage.image = UIImage(named: "plant_img")
         plantImage.layer.cornerRadius = 16
         plantImage.contentMode = .scaleAspectFill
         plantImage.clipsToBounds = true
@@ -133,6 +134,7 @@ final class PlantInfoViewController: UIViewController {
             timelineView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
         ])
         timelineView.actionControllerPresenter = self
+        timelineView.imagePicker = ImagePicker(presentationController: self, delegate: timelineView)
         timelineView.isHidden = true
         
         timelineButton.changeNotSelectedButtonView(title: "Timeline")

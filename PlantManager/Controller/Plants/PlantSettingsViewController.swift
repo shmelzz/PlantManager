@@ -179,7 +179,8 @@ final class PlantSettingsViewController: UIViewController {
         plant?.name = plantNameInput.text ?? "none"
         plant?.plantType = plantTypeInput.text ?? "none"
         plant?.place = roomNameInput.text ?? "none"
-        plant?.purchaseDay = purchaseDateInput.date.formatted()
+        plant?.wateringSpan = Int(wateringSpanStepper.value)
+        // plant?.purchaseDay = purchaseDateInput.date.formatted()
         
         Task {
             do {

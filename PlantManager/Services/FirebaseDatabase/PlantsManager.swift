@@ -18,19 +18,6 @@ enum Collections: String {
 
 struct PlantsManager {
     
-//    static func get(by id: String) async -> Result<PlantSpec, Error> {
-//        do {
-//            let query = DatabaseManager.shared.database
-//                .collection(Collections.users.rawValue)
-//                .whereField("id", isEqualTo: id)
-//
-//            let data = try await DatabaseManager.shared.getOne(of: PlantSpec.self, with: query).get()
-//            return .success(data)
-//        } catch let error {
-//            return .failure(error)
-//        }
-//    }
-    
     static func get(for userId: String) async -> Result<[Plant], Error> {
         do {
             let query = DatabaseManager.shared.database

@@ -40,21 +40,18 @@ final class ImageStorageManager {
     func getImage(path: String, completion: @escaping (UIImage?, Error?) -> Void) {
         storage.child(path).getData(maxSize: 6 * 1024 * 1024) { data, error in
             if error != nil {
-                // TODO
+                print("error detting image")
             } else {
-                DispatchQueue.main.async {
-                    if let data = data {
-                        let image = UIImage(data: data)
-                        completion(image, nil)
-                    }
+                if let data = data {
+                    let image = UIImage(data: data)
+                    completion(image, nil)
                 }
             }
         }
     }
     
-    func getAllImages(path: String, completion: @escaping ([UIImage], Error?) -> Void) {
+    func getAllImages(path: String, completion: @escaping (UIImage, Error?) -> Void) {
         storage.child(path).listAll { result, error in
-            var list: [UIImage] = []
             if let error = error {
                 print("An error has occurred - \(error.localizedDescription)")
             } else {
@@ -63,12 +60,11 @@ final class ImageStorageManager {
                     let name = item.name
                     self.getImage(path: "\(path)/\(name)") { image, error in
                         if error == nil,
-                           let image = image {
-                            list.append(image)
+                           let image = image{
+                            completion(image, nil)
                         }
                     }
                 }
-                completion(list, nil)
             }
         }
     }

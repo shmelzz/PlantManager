@@ -9,6 +9,8 @@ import UIKit
 
 final class PlantPhotoCollectionViewCell: UICollectionViewCell {
     
+    static let reuseId = "PlantPhotoCollectionViewCell"
+    
     private lazy var photoView = {
         let view = UIImageView()
         return view
@@ -34,9 +36,8 @@ final class PlantPhotoCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: contentView.topAnchor),
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            photoView.heightAnchor.constraint(lessThanOrEqualToConstant: 60),
-            photoView.widthAnchor.constraint(lessThanOrEqualToConstant: 60)
+            photoView.heightAnchor.constraint(equalToConstant: 100),
+            photoView.widthAnchor.constraint(equalToConstant: 100)
         ])
         
         photoView.contentMode = .scaleAspectFill
