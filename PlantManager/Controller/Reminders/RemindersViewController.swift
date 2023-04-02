@@ -18,6 +18,8 @@ final class RemindersViewController: UIViewController {
     private lazy var tableView = UITableView(frame: .zero)
     private lazy var dataSource = DataSource(tableView)
     private var tasks: [PlantTask] = []
+    private var todayTasks: [PlantTask] = []
+    private var upcomingTasks: [PlantTask] = []
     
     private enum Constants {
         static let sectionHeight: CGFloat = 44
@@ -49,10 +51,19 @@ final class RemindersViewController: UIViewController {
         var snapshot = dataSource.snapshot()
         snapshot.deleteAllItems()
         snapshot.appendSections(TaskSection.allCases)
-        let todayTasks = tasks.filter{ Calendar.current.isDateInToday($0.reminderDay)}
-        let upcomingTasks = tasks.filter{ !Calendar.current.isDateInToday($0.reminderDay)}
+        todayTasks = tasks.filter{ Calendar.current.isDateInToday($0.reminderDay)}
+        upcomingTasks = tasks.filter{ !Calendar.current.isDateInToday($0.reminderDay)}
         snapshot.appendItems(todayTasks, toSection: .today)
-        snapshot.appendItems(upcomingTasks, toSection: .today)
+        snapshot.appendItems(upcomingTasks, toSection: .upcoming)
+        dataSource.apply(snapshot)
+    }
+    
+    private func updateDataSource() {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        snapshot.appendSections(TaskSection.allCases)
+        snapshot.appendItems(todayTasks, toSection: .today)
+        snapshot.appendItems(upcomingTasks, toSection: .upcoming)
         dataSource.apply(snapshot)
     }
     
@@ -78,18 +89,18 @@ extension RemindersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if tasks[indexPath.row].completed {
-            tasks[indexPath.row].completed = false
+        if indexPath.section == 0 {
+            todayTasks[indexPath.row].completed.toggle()
             Task {
-                await self.tasks[indexPath.row].put(to: Collections.tasks.rawValue)
+                await self.todayTasks[indexPath.row].put(to: Collections.tasks.rawValue)
             }
         } else {
-            tasks[indexPath.row].completed = true
+            upcomingTasks[indexPath.row].completed.toggle()
             Task {
-                await self.tasks[indexPath.row].put(to: Collections.tasks.rawValue)
+                await self.upcomingTasks[indexPath.row].put(to: Collections.tasks.rawValue)
             }
         }
-        setupDataSource()
+        updateDataSource()
         tableView.reloadData()
     }
 }
