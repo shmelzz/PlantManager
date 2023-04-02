@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct Room {
+    var name: String
+}
+
 protocol AddRoomDelegate: AnyObject {
     func addNewRoom(newRoom: Room)
 }

@@ -59,8 +59,6 @@ class LoginViewController: UIViewController {
                 let tabBarController = TabBarController()
                 tabBarController.selectedIndex = 1
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(tabBarController)
-//                self.enterEmail.text = nil
-//                self.enterPassword.text = nil
             }
         }
     }
@@ -148,6 +146,7 @@ class LoginViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) { _, error in
             if error == nil {
+                NotificationManager.shared.requestAuthorization{result in }
                 Auth.auth().signIn(withEmail: email, password: password)
                 let tabBarController = TabBarController()
                 tabBarController.selectedIndex = 1

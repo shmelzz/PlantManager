@@ -35,8 +35,7 @@
 		CC72AA9129D05BEA00926B7C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9029D05BEA00926B7C /* Extensions.swift */; };
 		CC72AA9429D06C8200926B7C /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9329D06C8200926B7C /* NotificationManager.swift */; };
 		CC72AA9629D070B500926B7C /* PlantTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9529D070B500926B7C /* PlantTask.swift */; };
-		CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9729D070E900926B7C /* TaskManager.swift */; };
-		CC72AA9A29D0718F00926B7C /* TaskPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */; };
+		CC72AA9A29D0718F00926B7C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9929D0718F00926B7C /* TaskManager.swift */; };
 		CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */; };
 		CC72AA9F29D099BF00926B7C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */; };
 		CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7C29BF6A8500418230 /* PlantCareView.swift */; };
@@ -83,8 +82,7 @@
 		CC72AA9029D05BEA00926B7C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CC72AA9329D06C8200926B7C /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		CC72AA9529D070B500926B7C /* PlantTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTask.swift; sourceTree = "<group>"; };
-		CC72AA9729D070E900926B7C /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
-		CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPersistanceManager.swift; sourceTree = "<group>"; };
+		CC72AA9929D0718F00926B7C /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		CC72AA9C29D079BD00926B7C /* RemindersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersTableViewCell.swift; sourceTree = "<group>"; };
 		CC72AA9E29D099BF00926B7C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		CC84CF7C29BF6A8500418230 /* PlantCareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCareView.swift; sourceTree = "<group>"; };
@@ -244,8 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				CC72AA9329D06C8200926B7C /* NotificationManager.swift */,
-				CC72AA9729D070E900926B7C /* TaskManager.swift */,
-				CC72AA9929D0718F00926B7C /* TaskPersistanceManager.swift */,
+				CC72AA9929D0718F00926B7C /* TaskManager.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -423,7 +420,7 @@
 				CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */,
 				CC72AA9629D070B500926B7C /* PlantTask.swift in Sources */,
 				CC34B52F294A6C9900AAEA05 /* ImagePicker.swift in Sources */,
-				CC72AA9A29D0718F00926B7C /* TaskPersistanceManager.swift in Sources */,
+				CC72AA9A29D0718F00926B7C /* TaskManager.swift in Sources */,
 				CC34639A2943429900E07172 /* TabBarController.swift in Sources */,
 				CC22B27C294912FE00CEDEE5 /* AboutPlantInfoView.swift in Sources */,
 				CCA57C6D29D45C8400B80C73 /* Article.swift in Sources */,
@@ -447,7 +444,6 @@
 				CCD1DA8429D9927000414200 /* PlantsManager.swift in Sources */,
 				CC34638029432CD700E07172 /* PlantManager.xcdatamodeld in Sources */,
 				CCA57C6B29D45BEB00B80C73 /* DiscoverArticlesTableViewCell.swift in Sources */,
-				CC72AA9829D070E900926B7C /* TaskManager.swift in Sources */,
 				CC34639029433BAE00E07172 /* RemindersViewController.swift in Sources */,
 				CC4DDB5329D5918200978EE8 /* WebViewController.swift in Sources */,
 				CC72AA9D29D079BD00926B7C /* RemindersTableViewCell.swift in Sources */,

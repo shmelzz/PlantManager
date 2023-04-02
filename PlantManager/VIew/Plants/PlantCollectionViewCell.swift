@@ -35,7 +35,7 @@ final class PlantCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         roomLabel.text = nil
         plantNameLabel.text = nil
-        plantImage.image = UIImage(named: "plant_img")
+        plantImage.image = nil
     }
     
     // MARK: - Configuration
@@ -49,7 +49,7 @@ final class PlantCollectionViewCell: UICollectionViewCell {
         plantImage.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         plantImage.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         plantImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75).isActive = true
-        plantImage.image = UIImage(named: "plant_img")
+        plantImage.backgroundColor = .systemGray6
         
         plantNameLabel.translatesAutoresizingMaskIntoConstraints = false
         plantNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true

@@ -18,6 +18,7 @@ struct PlantTask: FirebaseIdentifiable {
     var id: String
     var userId: String
     var plantId: String
+    var plantName: String
     var completed = false
     var reminderDay: Date
     var taskType: PlantAction

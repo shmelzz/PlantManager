@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 enum TaskSection: Int, Hashable, CaseIterable {
     case today = 0
@@ -14,9 +15,9 @@ enum TaskSection: Int, Hashable, CaseIterable {
 
 final class RemindersViewController: UIViewController {
     
-    var taskManager = TaskManager.shared
     private lazy var tableView = UITableView(frame: .zero)
     private lazy var dataSource = DataSource(tableView)
+    private var tasks: [PlantTask] = []
     
     private enum Constants {
         static let sectionHeight: CGFloat = 44
@@ -41,17 +42,33 @@ final class RemindersViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.register(RemindersTableViewCell.self, forCellReuseIdentifier: RemindersTableViewCell.remindersCellId)
-        setupDataSource()
+        loadTasks()
     }
     
     private func setupDataSource() {
         var snapshot = dataSource.snapshot()
         snapshot.deleteAllItems()
         snapshot.appendSections(TaskSection.allCases)
-        snapshot.appendItems(tasks, toSection: .today)
+        let todayTasks = tasks.filter{ Calendar.current.isDateInToday($0.reminderDay)}
+        let upcomingTasks = tasks.filter{ !Calendar.current.isDateInToday($0.reminderDay)}
+        snapshot.appendItems(todayTasks, toSection: .today)
+        snapshot.appendItems(upcomingTasks, toSection: .today)
         dataSource.apply(snapshot)
     }
     
+    private func loadTasks() {
+        Task {
+            do {
+                if let userId = Auth.auth().currentUser?.uid {
+                    let tasks = await TaskManager.loadTasks(forUser:  userId)
+                    self.tasks = try tasks.get()
+                    setupDataSource()
+                }
+            } catch let error {
+                print(error)
+            }
+        }
+    }
 }
 
 extension RemindersViewController: UITableViewDelegate {
@@ -63,8 +80,14 @@ extension RemindersViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if tasks[indexPath.row].completed {
             tasks[indexPath.row].completed = false
+            Task {
+                await self.tasks[indexPath.row].put(to: Collections.tasks.rawValue)
+            }
         } else {
             tasks[indexPath.row].completed = true
+            Task {
+                await self.tasks[indexPath.row].put(to: Collections.tasks.rawValue)
+            }
         }
         setupDataSource()
         tableView.reloadData()
@@ -96,11 +119,4 @@ final private class DataSource: UITableViewDiffableDataSource<TaskSection, Plant
         }
     }
 }
-
-var tasks = [
-    PlantTask(plantName: "somethimg", reminder: Reminder(), taskType: .water),
-    PlantTask(plantName: "somethong2", reminder: Reminder(), taskType: .cut),
-    PlantTask(plantName: "somethimg3", reminder: Reminder(), taskType: .fertilize),
-    PlantTask(plantName: "somethimg4", reminder: Reminder(), taskType: .repot),
-]
 

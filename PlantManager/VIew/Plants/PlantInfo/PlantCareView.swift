@@ -28,6 +28,9 @@ final class PlantCareView: UIView {
     
     private lazy var tasksTableView = UITableView(frame: .zero)
     private lazy var dataSource = DataSource(tasksTableView)
+    private var tasks: [PlantTask] = []
+    private var todayTasks: [PlantTask] = []
+    private var upcomingTasks: [PlantTask] = []
     
     public init() {
         super.init(frame: .zero)
@@ -64,20 +67,24 @@ final class PlantCareView: UIView {
         tasksTableView.delegate = self
         tasksTableView.separatorStyle = .none
         tasksTableView.register(RemindersTableViewCell.self, forCellReuseIdentifier: RemindersTableViewCell.remindersCellId)
-        setupDataSource()
+        loadTasks()
     }
     
     private func setupDataSource() {
         var snapshot = dataSource.snapshot()
         snapshot.deleteAllItems()
         snapshot.appendSections(TaskSection.allCases)
-        snapshot.appendItems(tasks, toSection: .today)
+        todayTasks = tasks.filter{ Calendar.current.isDateInToday($0.reminderDay)}
+        upcomingTasks = tasks.filter{ !Calendar.current.isDateInToday($0.reminderDay)}
+        snapshot.appendItems(todayTasks, toSection: .today)
+        snapshot.appendItems(upcomingTasks, toSection: .upcoming)
         dataSource.apply(snapshot)
     }
     
     @objc
     private func addTaskButtonPressed() {
         let addTaskViewController = AddTaskViewController()
+        addTaskViewController.plant = actionControllerPresenter?.plant
         let nav = UINavigationController(rootViewController: addTaskViewController)
         if let sheetController = nav.sheetPresentationController {
             sheetController.detents = [.medium(), .large()]
@@ -85,6 +92,18 @@ final class PlantCareView: UIView {
             sheetController.prefersGrabberVisible = true
         }
         actionControllerPresenter?.present(nav, animated: true)
+    }
+    
+    private func loadTasks() {
+        Task {
+            do {
+                let tasks = await TaskManager.loadTasks(forPlant: actionControllerPresenter?.plant?.id ?? "")
+                self.tasks = try tasks.get()
+                setupDataSource()
+            } catch let error {
+                print(error)
+            }
+        }
     }
 }
 

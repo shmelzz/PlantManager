@@ -5,54 +5,36 @@
 //  Created by Elizaveta Shelemekh on 26.03.2023.
 //
 
-import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-class TaskManager: ObservableObject {
-    static let shared = TaskManager()
-    let taskPersistenceManager = TaskPersistenceManager()
+
+struct TaskManager {
     
-    @Published var tasks: [PlantTask] = []
-    
-    init() {
-        loadTasks()
-    }
-    
-    func save(task: PlantTask) {
-        tasks.append(task)
-        DispatchQueue.global().async {
-            self.taskPersistenceManager.save(tasks: self.tasks)
-        }
-        NotificationManager.shared.scheduleNotification(task: task)
-    }
-    
-    func loadTasks() {
-        self.tasks = taskPersistenceManager.loadTasks()
-    }
-    
-    func addNewTask(_ taskName: String, taskType: PlantAction) {
-        if let reminder = reminder {
-            save(task: PlantTask(plantName: taskName, reminderEnabled: true, reminder: reminder, taskType: taskType))
-        } else {
-            save(task: PlantTask(plantName: taskName, reminderEnabled: false, reminder: Reminder(), taskType: taskType))
+    static func loadTasks(forUser userId: String) async -> Result<[PlantTask], Error> {
+        do {
+            let query = DatabaseManager.shared.database
+                .collection(Collections.tasks.rawValue)
+                .whereField("userId", isEqualTo: userId)
+                .whereField("completed", isEqualTo: false)
+            let data = try await DatabaseManager.shared.getMany(of: PlantTask.self, with: query).get()
+            return .success(data)
+        } catch let error {
+            return .failure(error)
         }
     }
     
-    func remove(task: PlantTask) {
-        tasks.removeAll {
-            $0.id == task.id
+    static func loadTasks(forPlant plantId: String) async -> Result<[PlantTask], Error> {
+        do {
+            let query = DatabaseManager.shared.database
+                .collection(Collections.tasks.rawValue)
+                .whereField("plantId", isEqualTo: plantId)
+                .whereField("completed", isEqualTo: false)
+            let data = try await DatabaseManager.shared.getMany(of: PlantTask.self, with: query).get()
+            return .success(data)
+        } catch let error {
+            return .failure(error)
         }
-        DispatchQueue.global().async {
-            self.taskPersistenceManager.save(tasks: self.tasks)
-        }
-            NotificationManager.shared.removeScheduledNotification(task: task)
     }
     
-    func markTaskComplete(task: PlantTask) {
-        if let row = tasks.firstIndex(where: { $0.id == task.id }) {
-            var updatedTask = task
-            updatedTask.completed = true
-            tasks[row] = updatedTask
-        }
-    }
 }
-
