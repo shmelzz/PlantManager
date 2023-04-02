@@ -24,7 +24,6 @@
 		CC34639229433BF300E07172 /* PlantsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */; };
 		CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639529433C4300E07172 /* DiscoverViewController.swift */; };
 		CC34639A2943429900E07172 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3463992943429900E07172 /* TabBarController.swift */; };
-		CC34639C29435EE900E07172 /* PlantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639B29435EE900E07172 /* PlantType.swift */; };
 		CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */; };
 		CC34B52F294A6C9900AAEA05 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */; };
 		CC45E31929BDF4B300962B8D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CC45E31829BDF4B300962B8D /* FirebaseAnalytics */; };
@@ -76,7 +75,6 @@
 		CC34639129433BF300E07172 /* PlantsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsCollectionViewController.swift; sourceTree = "<group>"; };
 		CC34639529433C4300E07172 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		CC3463992943429900E07172 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		CC34639B29435EE900E07172 /* PlantType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantType.swift; sourceTree = "<group>"; };
 		CC34639D2943C2F600E07172 /* PlantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC34B52E294A6C9900AAEA05 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		CC4DDB5229D5918200978EE8 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 		CC34638D2943390B00E07172 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC34639B29435EE900E07172 /* PlantType.swift */,
 				CC72AA9529D070B500926B7C /* PlantTask.swift */,
 				CCA57C6829D4557F00B80C73 /* User.swift */,
 				CCA57C6C29D45C8400B80C73 /* Article.swift */,
@@ -437,7 +434,6 @@
 				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
 				CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */,
 				CCDDC20F29D731C600A75581 /* PlantNoteCollectionViewCell.swift in Sources */,
-				CC34639C29435EE900E07172 /* PlantType.swift in Sources */,
 				CCDDC21129D731D800A75581 /* PlantPhotoCollectionViewCell.swift in Sources */,
 				CC34639E2943C2F600E07172 /* PlantCollectionViewCell.swift in Sources */,
 				CC34637629432CD700E07172 /* AppDelegate.swift in Sources */,
