@@ -19,7 +19,7 @@ final class DiscoverViewController: UIViewController {
         self.navigationItem.title = "Discover"
         self.view.backgroundColor = .white
         setupTableView()
-        // fetchArticles()
+        fetchArticles()
     }
     
     private func setupTableView() {
@@ -44,20 +44,17 @@ final class DiscoverViewController: UIViewController {
         dataSource.apply(snapshot)
     }
     
-//    private func fetchArticles() {
-//        ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-//            for child in snapshot.children {
-//                if
-//                    let snapshot = child as? DataSnapshot,
-//                    let groceryItem = Article(snapshot: snapshot) {
-//                    self?.articles.append(groceryItem)
-//                }
-//            }
-//            self?.setupDataSource()
-//        }){ error in
-//            print(error.localizedDescription)
-//        }
-//    }
+    private func fetchArticles() {
+        Task {
+            do {
+                let articles = await ArticlesManager.getAll()
+                self.articles = try articles.get()
+                setupDataSource()
+            } catch let error {
+                print(error)
+            }
+        }
+    }
 }
 
 extension DiscoverViewController: UITableViewDelegate {
@@ -72,7 +69,7 @@ extension DiscoverViewController: UITableViewDelegate {
     
     @objc
     private func openLink(_ index: Int) {
-        if let url = articles[index].url {
+        if let url = URL(string: articles[index].url) {
             navigationController?.pushViewController(WebViewController(url: url), animated: true)
         }
     }

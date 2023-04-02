@@ -65,13 +65,26 @@ final class DiscoverArticlesTableViewCell: UITableViewCell {
         ])
     }
     
+    func loadImage(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.articleImageView.image = image
+                    }
+                } else {
+                    self?.articleImageView.image = UIImage(named: "launchphoto")
+                }
+            }
+        }
+    }
+    
     func configure(with model: Article) {
         titleLabel.text = model.title
-        // TODO update
-        ImageStorageManager.shared.getImage(path: "test.png") { [weak self] image, error in
-            if error == nil {
-                self?.articleImageView.image = image
-            }
+        if let url = URL(string: model.image) {
+            loadImage(url: url)
+        } else {
+            articleImageView.image = UIImage(named: "launchphoto")
         }
     }
 }

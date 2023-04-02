@@ -7,23 +7,9 @@
 
 import UIKit
 
-struct Article: Hashable {
+struct Article: FirebaseIdentifiable {
+    var id: String
     let title: String
-    let url: URL?
-    let image: URL?
-    
-//    init?(snapshot: DataSnapshot) {
-//      guard
-//        let value = snapshot.value as? [String: AnyObject],
-//        let title = value["title"] as? String,
-//        let url = value["url"] as? String,
-//        let imageUrl = value["imageUrl"] as? String
-//      else {
-//        return nil
-//      }
-//
-//      self.title = title
-//      self.url = URL(string: url)
-//      self.image = URL(string: imageUrl)
-//    }
+    let url: String
+    let image: String
 }

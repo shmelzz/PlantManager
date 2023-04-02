@@ -11,6 +11,7 @@
 		CC1D3B0E2947801B00FE5EC5 /* AddRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */; };
 		CC1D927B29D9B50E0028F6FF /* FirebaseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D927A29D9B50E0028F6FF /* FirebaseIdentifiable.swift */; };
 		CC1D927D29D9BB0F0028F6FF /* NotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D927C29D9BB0F0028F6FF /* NotesManager.swift */; };
+		CC1D927F29D9FF050028F6FF /* ArticlesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1D927E29D9FF050028F6FF /* ArticlesManager.swift */; };
 		CC21F5DB2949B6720039DD24 /* PlantSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */; };
 		CC22B27A2948B1F200CEDEE5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22B2792948B1F200CEDEE5 /* Utils.swift */; };
 		CC22B27C294912FE00CEDEE5 /* AboutPlantInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */; };
@@ -60,6 +61,7 @@
 		CC1D3B0D2947801B00FE5EC5 /* AddRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoomViewController.swift; sourceTree = "<group>"; };
 		CC1D927A29D9B50E0028F6FF /* FirebaseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIdentifiable.swift; sourceTree = "<group>"; };
 		CC1D927C29D9BB0F0028F6FF /* NotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesManager.swift; sourceTree = "<group>"; };
+		CC1D927E29D9FF050028F6FF /* ArticlesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesManager.swift; sourceTree = "<group>"; };
 		CC21F5DA2949B6720039DD24 /* PlantSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantSettingsViewController.swift; sourceTree = "<group>"; };
 		CC22B2792948B1F200CEDEE5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CC22B27B294912FE00CEDEE5 /* AboutPlantInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPlantInfoView.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				CC4DDB5529D5B47C00978EE8 /* DatabaseManager.swift */,
 				CCD1DA8329D9927000414200 /* PlantsManager.swift */,
 				CC1D927C29D9BB0F0028F6FF /* NotesManager.swift */,
+				CC1D927E29D9FF050028F6FF /* ArticlesManager.swift */,
 			);
 			path = FirebaseDatabase;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				CCA57C6D29D45C8400B80C73 /* Article.swift in Sources */,
 				CCFE218E2947A77E00C4BBB4 /* RoomsTableViewCell.swift in Sources */,
 				CC1D927B29D9B50E0028F6FF /* FirebaseIdentifiable.swift in Sources */,
+				CC1D927F29D9FF050028F6FF /* ArticlesManager.swift in Sources */,
 				CC22B27A2948B1F200CEDEE5 /* Utils.swift in Sources */,
 				CC34639629433C4300E07172 /* DiscoverViewController.swift in Sources */,
 				CC84CF7D29BF6A8500418230 /* PlantCareView.swift in Sources */,
