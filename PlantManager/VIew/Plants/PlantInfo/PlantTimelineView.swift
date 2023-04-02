@@ -14,6 +14,8 @@ final class PlantTimelineView: UIView{
         case notes
     }
     
+    weak var actionControllerPresenter: PlantInfoViewController?
+    
     private var plant: Plant?
     private var notes: [PlantNote]?
     private var images: [UIImage]?
@@ -102,7 +104,17 @@ final class PlantTimelineView: UIView{
     
     @objc
     private func addNoteButtonPressed() {
-        
+        let alert = UIAlertController(title: "Add note", message: "", preferredStyle: .alert)
+        alert.addTextField()
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("OK", comment: "Default action"),
+            style: .default,
+            handler: { _ in }))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: "Default action"),
+            style: .default,
+            handler: { _ in }))
+        actionControllerPresenter?.present(alert, animated: true)
     }
     
     @objc

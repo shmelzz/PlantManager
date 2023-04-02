@@ -30,6 +30,7 @@ final class PlantInfoViewController: UIViewController {
     private lazy var timelineButton = UIButton()
     private lazy var aboutInfoView = AboutPlantInfoView()
     private lazy var plantCareView = PlantCareView()
+    private lazy var timelineView = PlantTimelineView()
     
     weak var delegate: PlantWasEditedDelegate?
     weak var deleteDelegate: PlantWasDeletedDelegate?
@@ -112,6 +113,17 @@ final class PlantInfoViewController: UIViewController {
         ])
         plantCareView.actionControllerPresenter = self
         
+        view.addSubview(timelineView)
+        timelineView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            timelineView.topAnchor.constraint(equalTo: aboutButton.bottomAnchor, constant: 16),
+            timelineView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            timelineView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            timelineView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+        ])
+        timelineView.actionControllerPresenter = self
+        timelineView.isHidden = true
+        
         timelineButton.changeNotSelectedButtonView(title: "Timeline")
         aboutButton.changeNotSelectedButtonView(title: "Care")
         
@@ -159,6 +171,7 @@ final class PlantInfoViewController: UIViewController {
         
         aboutInfoView.isHidden = false
         plantCareView.isHidden = true
+        timelineView.isHidden = true
     }
     
     @objc
@@ -169,6 +182,7 @@ final class PlantInfoViewController: UIViewController {
         
         aboutInfoView.isHidden = true
         plantCareView.isHidden = false
+        timelineView.isHidden = true
     }
     
     @objc
@@ -179,6 +193,7 @@ final class PlantInfoViewController: UIViewController {
         
         aboutInfoView.isHidden = true
         plantCareView.isHidden = true
+        timelineView.isHidden = false
     }
 }
 

@@ -40,16 +40,24 @@ final class PlantNoteCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(noteLabel)
         noteLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        
+            noteLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            noteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            noteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         
         contentView.addSubview(dateLabel)
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        
+            dateLabel.topAnchor.constraint(equalTo: noteLabel.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
     
-   // func configure
+    func configure(note: PlantNote) {
+        noteLabel.text = note.text
+        dateLabel.text = note.date
+    }
 }
 
