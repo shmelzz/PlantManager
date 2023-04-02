@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class PlantCollectionViewCell: UICollectionViewCell {
     
@@ -18,50 +19,23 @@ final class PlantCollectionViewCell: UICollectionViewCell {
     }()
     
     private let plantImage = UIImageView()
-    
 
-    var roomNameText: String {
-        get {
-            roomLabel.text ?? ""
-        }
-        set {
-            roomLabel.text = newValue
-        }
-    }
-    
-    var plantNameText: String {
-        get {
-            plantNameLabel.text ?? ""
-        }
-        set {
-            plantNameLabel.text = newValue
-        }
-    }
-    
-    var plantImageView: UIImage {
-        get {
-            plantImage.image ?? UIImage()
-        }
-        set {
-            plantImage.image = newValue
-        }
-    }
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func prepareForReuse() {
         roomLabel.text = nil
         plantNameLabel.text = nil
-        plantImage.image = nil
+        plantImage.image = UIImage(named: "plant_img")
     }
     
     // MARK: - Configuration
@@ -75,6 +49,7 @@ final class PlantCollectionViewCell: UICollectionViewCell {
         plantImage.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         plantImage.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         plantImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.75).isActive = true
+        plantImage.image = UIImage(named: "plant_img")
         
         plantNameLabel.translatesAutoresizingMaskIntoConstraints = false
         plantNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
@@ -91,6 +66,19 @@ final class PlantCollectionViewCell: UICollectionViewCell {
         
         plantImage.contentMode = .scaleAspectFill
         plantImage.clipsToBounds = true
-        plantImage.layer.cornerRadius = 12      
+        plantImage.layer.cornerRadius = 12
+    }
+    
+    func configure(plant: Plant) {
+        plantNameLabel.text = plant.name
+        roomLabel.text = plant.place
+        
+        if let currentUser = Auth.auth().currentUser?.uid {
+            ImageStorageManager.shared.getMainImage(path: "\(currentUser)/\(plant.id)"){ [weak self] image, error in
+                if error == nil {
+                        self?.plantImage.image = image
+                }
+            }
+        }
     }
 }

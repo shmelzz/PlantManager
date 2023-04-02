@@ -11,13 +11,13 @@ class TaskManager: ObservableObject {
   static let shared = TaskManager()
   let taskPersistenceManager = TaskPersistenceManager()
 
-  @Published var tasks: [Task] = []
+  @Published var tasks: [PlantTask] = []
 
   init() {
     loadTasks()
   }
 
-  func save(task: Task) {
+  func save(task: PlantTask) {
     tasks.append(task)
     DispatchQueue.global().async {
       self.taskPersistenceManager.save(tasks: self.tasks)
@@ -33,13 +33,13 @@ class TaskManager: ObservableObject {
 
     func addNewTask(_ taskName: String, _ reminder: Reminder?, taskType: PlantAction) {
     if let reminder = reminder {
-      save(task: Task(plantName: taskName, reminderEnabled: true, reminder: reminder, taskType: taskType))
+      save(task: PlantTask(plantName: taskName, reminderEnabled: true, reminder: reminder, taskType: taskType))
     } else {
-      save(task: Task(plantName: taskName, reminderEnabled: false, reminder: Reminder(), taskType: taskType))
+      save(task: PlantTask(plantName: taskName, reminderEnabled: false, reminder: Reminder(), taskType: taskType))
     }
   }
 
-  func remove(task: Task) {
+  func remove(task: PlantTask) {
     tasks.removeAll {
       $0.id == task.id
     }
@@ -51,7 +51,7 @@ class TaskManager: ObservableObject {
     }
   }
 
-  func markTaskComplete(task: Task) {
+  func markTaskComplete(task: PlantTask) {
     if let row = tasks.firstIndex(where: { $0.id == task.id }) {
       var updatedTask = task
       updatedTask.completed = true

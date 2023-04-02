@@ -8,7 +8,6 @@
 import UIKit
 import CoreData
 import FirebaseCore
-import FirebaseDatabase
 
 
 @main
@@ -97,7 +96,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     if response.actionIdentifier == "markAsDone" {
       let userInfo = response.notification.request.content.userInfo
       if let taskData = userInfo["Task"] as? Data {
-        if let task = try? JSONDecoder().decode(Task.self, from: taskData) {
+        if let task = try? JSONDecoder().decode(PlantTask.self, from: taskData) {
           // 3
           TaskManager.shared.remove(task: task)
         }

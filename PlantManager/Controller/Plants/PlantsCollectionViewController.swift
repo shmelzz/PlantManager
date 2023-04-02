@@ -18,7 +18,6 @@ final class PlantsCollectionViewController: UIViewController {
     }
     
     private var rooms: [RoomCount] = []
-    private var plantsCollection: [NSManagedObject] = []
     private var plants: [Plant] = []
     
     private let reuseIdentifier = "PlantCell"
@@ -46,7 +45,6 @@ final class PlantsCollectionViewController: UIViewController {
     }
     
     private var plantsCollectionView: UICollectionView
-    
     private lazy var roomsTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private lazy var plantsUILabel: UILabel = {
@@ -143,9 +141,20 @@ final class PlantsCollectionViewController: UIViewController {
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         toggle.addTarget(self, action: #selector(changeViewWithToggle), for: .touchUpInside)
         
-        fetchData()
-        getRooms()
+        loadPlants()
         setupNavBar()
+    }
+    
+    private func loadPlants() {
+        Task {
+            do {
+                let books = await PlantsManager.get(for: Auth.auth().currentUser?.uid ?? "some-id")
+                self.plants = try books.get()
+                plantsCollectionView.reloadData()
+            } catch let error {
+                print(error)
+            }
+        }
     }
     
     private func setupNavBar(){
@@ -199,7 +208,6 @@ final class PlantsCollectionViewController: UIViewController {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0))
         let fullPhotoItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        //2
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalWidth(0.6))
@@ -208,7 +216,6 @@ final class PlantsCollectionViewController: UIViewController {
             subitem: fullPhotoItem,
             count: 2
         )
-        //3
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         fullPhotoItem.contentInsets = NSDirectionalEdgeInsets(
@@ -221,11 +228,8 @@ final class PlantsCollectionViewController: UIViewController {
     
     @objc
     func addButtonPressed() {
-        // var addView: AddView
-        // var nav = UINavigationController()
         if toggle.isOn {
             let addView = AddRoomViewController()
-            
             let nav = UINavigationController(rootViewController: addView)
             if let sheetController = nav.sheetPresentationController {
                 sheetController.detents = [.medium(), .large()]
@@ -236,7 +240,6 @@ final class PlantsCollectionViewController: UIViewController {
         } else {
             let addView = AddPlantViewController()
             addView.delegate = self
-            
             let nav = UINavigationController(rootViewController: addView)
             if let sheetController = nav.sheetPresentationController {
                 sheetController.detents = [.medium(), .large()]
@@ -277,10 +280,10 @@ final class PlantsCollectionViewController: UIViewController {
     private func getRooms() {
         var roomsDictionary: [String: Int] = [:]
         for plant in plants {
-            if roomsDictionary.keys.contains(plant.place.name.lowercased().capitalized) {
-                roomsDictionary[plant.place.name.lowercased().capitalized]!+=1
+            if roomsDictionary.keys.contains(plant.place.lowercased().capitalized) {
+                roomsDictionary[plant.place.lowercased().capitalized]!+=1
             } else {
-                roomsDictionary[plant.place.name.lowercased().capitalized] = 1
+                roomsDictionary[plant.place.lowercased().capitalized] = 1
             }
         }
         
@@ -312,9 +315,7 @@ extension PlantsCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = plantsCollectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PlantCollectionViewCell
-        cell.roomNameText = plants[indexPath.row].place.name
-        cell.plantNameText = plants[indexPath.row].name
-        cell.plantImageView = plants[indexPath.row].image ?? UIImage(named: "plant_img") ?? UIImage()
+        cell.configure(plant: plants[indexPath.row])
         return cell
     }
 }
@@ -333,10 +334,9 @@ extension PlantsCollectionViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension PlantsCollectionViewController:UITableViewDelegate {
+extension PlantsCollectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let plantInfoView = PlantInfoView()
-        //        navigationController?.pushViewController(plantInfoView, animated: true)
+        
     }
 }
 
@@ -345,7 +345,6 @@ extension PlantsCollectionViewController: AddPlantDelegate {
     func addNewPlantToCollection(newPlant: Plant) {
         plants.insert(newPlant, at: 0)
         plantsCollectionView.reloadData()
-        self.savePlant(plantToSave: newPlant)
     }
 }
 
@@ -353,7 +352,7 @@ extension PlantsCollectionViewController: AddPlantDelegate {
 extension PlantsCollectionViewController: PlantWasEditedDelegate {
     func plantWithIndexWasEdited(indexPath: IndexPath, newInfoPlant: Plant?) {
         plants[indexPath.row] = newInfoPlant ?? plants[indexPath.row]
-        self.editObject(index: indexPath.row, plantToEdit: newInfoPlant ?? plants[indexPath.row])
+        // self.editObject(index: indexPath.row, plantToEdit: newInfoPlant ?? plants[indexPath.row])
         plantsCollectionView.reloadData()
     }
 }
@@ -362,129 +361,7 @@ extension PlantsCollectionViewController: PlantWasEditedDelegate {
 extension PlantsCollectionViewController: PlantWasDeletedDelegate {
     func plantWithIndexWasDeleted(indexPath: IndexPath) {
         plants.remove(at: indexPath.row)
-        self.deleteObject(index: indexPath.row)
+        // self.deleteObject(index: indexPath.row)
         plantsCollectionView.reloadData()
-    }
-}
-
-// MARK: - CoreData
-extension PlantsCollectionViewController {
-    
-    // MARK: save data
-    func savePlant(plantToSave: Plant) {
-        
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext =
-        appDelegate.persistentContainer.viewContext
-        
-        let entity =
-        NSEntityDescription.entity(forEntityName: "PlantEntity", in: managedContext)!
-        
-        let plant = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        plant.setValue(plantToSave.name, forKey: "name")
-        plant.setValue(plantToSave.place.name, forKey: "place")
-        plant.setValue(plantToSave.wateringSpan, forKey: "wateringSpan")
-        plant.setValue(plantToSave.plantType.title, forKey: "plantType")
-        plant.setValue(plantToSave.purchaseDay, forKey: "purchaseDay")
-        //
-        plant.setValue(plantToSave.image?.toData as NSData?, forKey: "image")
-        
-        do {
-            try managedContext.save()
-            plantsCollection.append(plant)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    // MARK: fetch data
-    func fetchData() {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "PlantEntity")
-        
-        do {
-            plantsCollection = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        for obj in plantsCollection {
-            let name = obj.value(forKey: "name") as? String ?? "-"
-            let place = Room(name: obj.value(forKey: "place") as? String ?? "-")
-            let plantType = PlantType(title: obj.value(forKey: "plantType") as? String ?? "-")
-            let date = obj.value(forKey: "purchaseDay") as? Date ?? Date()
-            let wateringSpan = obj.value(forKey: "wateringSpan") as? Int ?? 0
-            let image = UIImage(data: obj.value(forKey: "image") as? Data ?? Data())
-            let plant = Plant(name: name,
-                              plantType: plantType,
-                              place: place,
-                              purchaseDay: date,
-                              wateringSpan: wateringSpan,
-                              image: image)
-            plants.append(plant)
-        }
-    }
-    
-    // MARK: edit data
-    func editObject(index: Int, plantToEdit: Plant) {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        managedContext.delete(self.plantsCollection[index])
-        self.plantsCollection.remove(at: index)
-        
-        let entity = NSEntityDescription.entity(forEntityName: "PlantEntity", in: managedContext)!
-        
-        let plant = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        plant.setValue(plantToEdit.name, forKey: "name")
-        plant.setValue(plantToEdit.place.name, forKey: "place")
-        plant.setValue(plantToEdit.wateringSpan, forKey: "wateringSpan")
-        plant.setValue(plantToEdit.plantType.title, forKey: "plantType")
-        plant.setValue(plantToEdit.purchaseDay, forKey: "purchaseDay")
-        plant.setValue(plantToEdit.image?.toData as NSData?, forKey: "image")
-        
-        do {
-            try managedContext.save()
-            if plantsCollection.count == 0 {
-                plantsCollection.append(plant)
-            } else {
-                plantsCollection[index] = plant
-            }
-        } catch let error as NSError {
-            print("Could not edit. \(error), \(error.userInfo)")
-        }
-    }
-    
-    // MARK: delete data
-    func deleteObject(index: Int) {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        managedContext.delete(self.plantsCollection[index])
-        self.plantsCollection.remove(at: index)
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
     }
 }

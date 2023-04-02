@@ -138,8 +138,14 @@ extension PlantTimelineView : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        if collectionView == notesCollectionView {
+            let cell = PlantNoteCollectionViewCell()
+            cell.configure(note: notes?[indexPath.row])
+            return cell
+        } else {
+            let cell = PlantPhotoCollectionViewCell()
+            cell.configure(photo: images?[indexPath.row] ?? UIImage())
+            return cell
+        }
     }
-    
-    
 }

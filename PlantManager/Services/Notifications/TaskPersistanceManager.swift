@@ -12,7 +12,7 @@ class TaskPersistenceManager {
     static let tasksFileName = "tasks.json"
   }
 
-  func save(tasks: [Task]) {
+  func save(tasks: [PlantTask]) {
     do {
       let documentsDirectory = getDocumentsDirectory()
       let storageURL = documentsDirectory.appendingPathComponent(FileConstants.tasksFileName)
@@ -27,12 +27,12 @@ class TaskPersistenceManager {
     }
   }
 
-  func loadTasks() -> [Task] {
+  func loadTasks() -> [PlantTask] {
     let documentsDirectory = getDocumentsDirectory()
     let storageURL = documentsDirectory.appendingPathComponent(FileConstants.tasksFileName)
     guard
       let taskData = try? Data(contentsOf: storageURL),
-      let tasks = try? JSONDecoder().decode([Task].self, from: taskData)
+      let tasks = try? JSONDecoder().decode([PlantTask].self, from: taskData)
     else {
       return []
     }

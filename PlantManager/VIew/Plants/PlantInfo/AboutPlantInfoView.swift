@@ -24,24 +24,11 @@ final class AboutPlantInfoView: UIStackView {
         distribution = .equalSpacing
         axis = .vertical
         spacing = 24
+        setupView()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    var plantInfo: Plant {
-        get {
-            plant ?? Plant(name: "none",
-                           plantType: PlantType(title: "none"),
-                           place: Room(name: "none"),
-                           purchaseDay: Date(),
-                           wateringSpan: 0)
-        }
-        set {
-            plant = newValue
-            setupView()
-        }
     }
     
     func updatePlantInfo(newInfo: Plant?) {
@@ -51,17 +38,17 @@ final class AboutPlantInfoView: UIStackView {
     
     // MARK: - view setup
     private func configureLabels(){
-        typeLabel.text = "Plant type: \(plant?.plantType.title ?? "")"
-        placeLabel.text = "Place: \(plant?.place.name ?? "")"
+        typeLabel.text = "Plant type: \(plant?.plantType ?? "")"
+        placeLabel.text = "Place: \(plant?.place ?? "")"
         wateringSpanLabel.text = "Watering: Every \(plant?.wateringSpan ?? 0) days"
-        purchaseLabel.text = "Purchase day: \(plant?.purchaseDay.formatted(date: .long, time: .omitted) ?? "")"
+        purchaseLabel.text = "Purchase day: \(plant?.purchaseDay ?? "")"
     }
     
     private func setupView() {
-        configureLabels()
         addArrangedSubview(typeLabel)
         addArrangedSubview(placeLabel)
         addArrangedSubview(purchaseLabel)
         addArrangedSubview(wateringSpanLabel)
+        configureLabels()
     }
 }

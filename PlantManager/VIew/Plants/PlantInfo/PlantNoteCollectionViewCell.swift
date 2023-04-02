@@ -55,9 +55,9 @@ final class PlantNoteCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(note: PlantNote) {
-        noteLabel.text = note.text
-        dateLabel.text = note.date
+    func configure(note: PlantNote?) {
+        noteLabel.text = note?.text
+        dateLabel.text = note?.date
     }
 }
 

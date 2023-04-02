@@ -182,20 +182,33 @@ final class AddPlantViewController: UIViewController {
     func doneAdd(){
         let name = plantNameInput.text ?? "none"
         let type = plantTypeInput.text ?? "none"
-        let room = Room(name: roomNameInput.text ?? "none")
-        let date = purchaseDateInput.date
-        let newPlant = Plant(name: name,
-                             plantType: PlantType(title: type),
-                             place: room, purchaseDay: date,
-                             wateringSpan: Int(wateringSpanStepper.value),
-                             image: plantImage.image)
-        delegate?.addNewPlantToCollection(newPlant: newPlant)
+        let date = purchaseDateInput.date.formatted()
         
-        var plantToSave = PlantSpec(name: name, plantType: type, place: room.name, wateringSpan: Int(wateringSpanStepper.value))
-        plantToSave.purchaseDay = date
+        let plantToSave = Plant(
+            id: "",
+            userId: Auth.auth().currentUser?.uid ?? "some-id",
+            name: name,
+            plantType:  type,
+            place: roomNameInput.text ?? "none",
+            purchaseDay: date,
+            wateringSpan: Int(wateringSpanStepper.value)
+        )
         
-        DatabaseManager.shared.postPlant(user: Auth.auth().currentUser?.uid ?? "dbjk;", plant: plantToSave)
+        Task {
+            do {
+                let data = try await plantToSave.post(to: Collections.plants.rawValue).get()
+                if let image = plantImage.image,
+                   let currentUser = Auth.auth().currentUser?.uid {
+                    ImageStorageManager.shared.saveImage(image, path: "\(currentUser)/\(data.id)/main-image.jpeg"){ _ in
+                        print("image was saved")
+                    }
+                }
+            } catch let error {
+                print(error)
+            }
+        }
         
+        delegate?.addNewPlantToCollection(newPlant: plantToSave)
         dismiss(animated: true)
     }
 }
@@ -205,10 +218,5 @@ extension AddPlantViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         plantImage.image = image
-//        if let image = image {
-//            ImageStorageManager.shared.saveImage(image, path: "testfolder/test.png"){ _ in
-//                print("image was saved")
-//            }
-//        }
     }
 }

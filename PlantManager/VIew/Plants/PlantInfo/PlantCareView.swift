@@ -95,7 +95,7 @@ extension PlantCareView: UITableViewDelegate {
 }
 
 // MARK: - Data source
-final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task> {
+final private class DataSource: UITableViewDiffableDataSource<TaskSection, PlantTask> {
     
     init(_ tableView: UITableView) {
         super.init(tableView: tableView) { tableView, indexPath, itemIdentifier in

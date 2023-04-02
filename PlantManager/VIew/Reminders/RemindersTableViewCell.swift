@@ -93,7 +93,7 @@ final class RemindersTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(with model: Task) {
+    func configure(with model: PlantTask) {
         taskTitleLabel.text = model.plantName
         if model.completed {
             checkButton.isSelected = true

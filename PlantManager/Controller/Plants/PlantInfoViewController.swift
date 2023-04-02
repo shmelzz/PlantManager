@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 // MARK: - Protocols
 protocol PlantWasEditedDelegate: AnyObject {
@@ -46,7 +47,6 @@ final class PlantInfoViewController: UIViewController {
             target: self,
             action: #selector(settingsTapped)
         )
-        
         updateTitle()
     }
     
@@ -54,6 +54,16 @@ final class PlantInfoViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         tabBarController?.tabBar.isHidden = true
+    }
+    
+    func setupImage() {
+        if let currentUser = Auth.auth().currentUser?.uid {
+            ImageStorageManager.shared.getMainImage(path: "\(currentUser)/\(plant?.id ?? "")"){ [weak self] image, error in
+                if error == nil {
+                    self?.plantImage.image = image
+                }
+            }
+        }
     }
     
     // MARK: - View setup
@@ -102,6 +112,7 @@ final class PlantInfoViewController: UIViewController {
         aboutInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         aboutInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         aboutInfoView.isHidden = true
+        aboutInfoView.updatePlantInfo(newInfo: plant)
         
         view.addSubview(plantCareView)
         plantCareView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,17 +141,8 @@ final class PlantInfoViewController: UIViewController {
         timelineButton.addTarget(self, action: #selector(timelineButtonTapped), for: .touchUpInside)
         careButton.addTarget(self, action: #selector(careButtonTapped), for: .touchUpInside)
         aboutButton.addTarget(self, action: #selector(aboutButtonTapped), for: .touchUpInside)
-        setupAboutView()
         
-        plantImage.image = plant?.image ?? UIImage(named: "plant_img")
-    }
-    
-    private func setupAboutView() {
-        aboutInfoView.plantInfo = plant ?? Plant(name: "none",
-                                                 plantType: PlantType(title: "none"),
-                                                 place: Room(name: "none"),
-                                                 purchaseDay: Date(),
-                                                 wateringSpan: 0)
+        setupImage()
     }
     
     private func updateTitle() {
@@ -151,7 +153,7 @@ final class PlantInfoViewController: UIViewController {
     @objc
     private func settingsTapped() {
         let settingsView = PlantSettingsViewController()
-        settingsView.plant = self.plant
+        settingsView.plant = plant
         settingsView.delegate = self
         settingsView.deleteDelegate = self
         let nav = UINavigationController(rootViewController: settingsView)

@@ -72,7 +72,7 @@ extension RemindersViewController: UITableViewDelegate {
 }
 
 // MARK: - Data source
-final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task> {
+final private class DataSource: UITableViewDiffableDataSource<TaskSection, PlantTask> {
     
     init(_ tableView: UITableView) {
         super.init(tableView: tableView) { tableView, indexPath, itemIdentifier in
@@ -98,9 +98,9 @@ final private class DataSource: UITableViewDiffableDataSource<TaskSection, Task>
 }
 
 var tasks = [
-    Task(plantName: "somethimg", reminder: Reminder(), taskType: .water),
-    Task(plantName: "somethong2", reminder: Reminder(), taskType: .cut),
-    Task(plantName: "somethimg3", reminder: Reminder(), taskType: .fertilize),
-    Task(plantName: "somethimg4", reminder: Reminder(), taskType: .repot),
+    PlantTask(plantName: "somethimg", reminder: Reminder(), taskType: .water),
+    PlantTask(plantName: "somethong2", reminder: Reminder(), taskType: .cut),
+    PlantTask(plantName: "somethimg3", reminder: Reminder(), taskType: .fertilize),
+    PlantTask(plantName: "somethimg4", reminder: Reminder(), taskType: .repot),
 ]
 

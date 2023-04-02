@@ -84,9 +84,9 @@ final class PlantSettingsViewController: UIViewController {
     // MARK: - setup view
     private func setupCurrentSettings() {
         plantNameInput.text = plant?.name
-        plantTypeInput.text = plant?.plantType.title
-        roomNameInput.text = plant?.place.name
-        purchaseDateInput.date = plant?.purchaseDay ?? Date()
+        plantTypeInput.text = plant?.plantType
+        roomNameInput.text = plant?.place
+        purchaseDateInput.date = DateFormatter().date(from: plant?.purchaseDay ?? "") ?? Date()
         wateringSpanStepper.value = Double(plant?.wateringSpan ?? 0)
         wateringSpanValueChanged()
     }
@@ -148,7 +148,7 @@ final class PlantSettingsViewController: UIViewController {
     private func setupNavBar() {
         title = "Settings"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain,target: self, action: #selector(cancelAdd))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAdd))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEdit))
     }
     
     // MARK: - Actions
@@ -158,6 +158,13 @@ final class PlantSettingsViewController: UIViewController {
     
     @objc
     func deleteButtonTapped() {
+        Task {
+            do {
+                _ = try await plant?.delete(from: Collections.plants.rawValue).get()
+            } catch let error {
+                print(error)
+            }
+        }
         deleteDelegate?.plantWasDeleted()
         self.dismiss(animated: true)
     }
@@ -168,19 +175,21 @@ final class PlantSettingsViewController: UIViewController {
     }
     
     @objc
-    func doneAdd(){
-        let name = plantNameInput.text ?? "none"
-        let type = plantTypeInput.text ?? "none"
-        let room = Room(name: roomNameInput.text ?? "none")
-        let date = purchaseDateInput.date
-        let newPlant = Plant(name: name,
-                             plantType: PlantType(title: type),
-                             place: room,
-                             purchaseDay: date,
-                             wateringSpan: Int(wateringSpanStepper.value),
-                             image: plant?.image)
-        self.plant = newPlant
-        delegate?.plantWasEdited(editedPlant: newPlant)
+    private func doneEdit(){
+        plant?.name = plantNameInput.text ?? "none"
+        plant?.plantType = plantTypeInput.text ?? "none"
+        plant?.place = roomNameInput.text ?? "none"
+        plant?.purchaseDay = purchaseDateInput.date.formatted()
+        
+        Task {
+            do {
+                _ = try await plant?.put(to: Collections.plants.rawValue).get()
+            } catch let error {
+                print(error)
+            }
+        }
+        
+        delegate?.plantWasEdited(editedPlant: plant)
         self.dismiss(animated: true)
     }
 }

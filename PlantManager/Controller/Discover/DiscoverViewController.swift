@@ -6,13 +6,12 @@
 //
 
 import UIKit
-import FirebaseDatabase
 
 final class DiscoverViewController: UIViewController {
     
     private lazy var tableView = UITableView(frame: .zero)
     private lazy var dataSource = DataSource(tableView)
-    private let ref = Database.database().reference(withPath: "articles")
+    // private let ref = Database.database().reference(withPath: "articles")
     private var articles: [Article] = []
     
     override func viewDidLoad() {
@@ -20,7 +19,7 @@ final class DiscoverViewController: UIViewController {
         self.navigationItem.title = "Discover"
         self.view.backgroundColor = .white
         setupTableView()
-        fetchArticles()
+        // fetchArticles()
     }
     
     private func setupTableView() {
@@ -45,20 +44,20 @@ final class DiscoverViewController: UIViewController {
         dataSource.apply(snapshot)
     }
     
-    private func fetchArticles() {
-        ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-            for child in snapshot.children {
-                if
-                    let snapshot = child as? DataSnapshot,
-                    let groceryItem = Article(snapshot: snapshot) {
-                    self?.articles.append(groceryItem)
-                }
-            }
-            self?.setupDataSource()
-        }){ error in
-            print(error.localizedDescription)
-        }
-    }
+//    private func fetchArticles() {
+//        ref.observeSingleEvent(of: .value, with: { [weak self] snapshot in
+//            for child in snapshot.children {
+//                if
+//                    let snapshot = child as? DataSnapshot,
+//                    let groceryItem = Article(snapshot: snapshot) {
+//                    self?.articles.append(groceryItem)
+//                }
+//            }
+//            self?.setupDataSource()
+//        }){ error in
+//            print(error.localizedDescription)
+//        }
+//    }
 }
 
 extension DiscoverViewController: UITableViewDelegate {

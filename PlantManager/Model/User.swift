@@ -5,15 +5,16 @@
 //  Created by Elizaveta Shelemekh on 29.03.2023.
 //
 
-import FirebaseDatabase
+import FirebaseFirestore
 import Firebase
+
 
 struct User: Codable {
     
     let uid: String
     let email: String
-    var plants: [PlantSpec] = []
-    var rooms: [RoomSpec] = []
+    var plants: [Plant] = []
+    // var rooms: [RoomSpec] = []
     
     init(authData: Firebase.User) {
         uid = authData.uid
@@ -26,14 +27,15 @@ struct User: Codable {
     }
 }
 
-struct PlantSpec: Identifiable, Codable {
-    var id: String?
+struct Plant: FirebaseIdentifiable {
+    var id: String
+    var userId: String
     var name: String
     var plantType: String
     var place: String
-    var purchaseDay: Date?
+    var purchaseDay: String
     var wateringSpan: Int
-    var notes: [PlantNote]?
+}
     
 //    init?(snapshot: DataSnapshot) {
 //        guard
@@ -54,13 +56,14 @@ struct PlantSpec: Identifiable, Codable {
 //        self.purchaseDay = DateUtils.dateFormatter.date(from: purchaseDay)
 //        self.wateringSpan = Int(wateringSpan) ?? 7
 //    }
-}
+//
+//struct RoomSpec: FirebaseIdentifiable {
+//    let name: String
+//}
 
-struct RoomSpec: Codable {
-    let name: String
-}
-
-struct PlantNote: Codable {
+struct PlantNote: FirebaseIdentifiable {
+    var id: String
+    let plantId: String
     let text: String
     let date: String
 }

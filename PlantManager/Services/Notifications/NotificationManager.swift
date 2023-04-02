@@ -35,12 +35,12 @@ class NotificationManager: ObservableObject {
     }
   }
 
-  func removeScheduledNotification(task: Task) {
+  func removeScheduledNotification(task: PlantTask) {
     UNUserNotificationCenter.current()
       .removePendingNotificationRequests(withIdentifiers: [task.id])
   }
 
-  func scheduleNotification(task: Task) {
+  func scheduleNotification(task: PlantTask) {
     let content = UNMutableNotificationContent()
     content.title = task.plantName
     content.body = "Gentle reminder for your task!"

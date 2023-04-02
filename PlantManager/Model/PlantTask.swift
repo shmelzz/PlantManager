@@ -14,13 +14,13 @@ enum PlantAction: Codable {
     case repot
 }
 
-struct Task: Identifiable, Codable, Hashable {
+struct PlantTask: Identifiable, Codable, Hashable {
     
     func hash(into hasher: inout Hasher) {
         return hasher.combine(id)
     }
     
-    static func == (lhs: Task, rhs: Task) -> Bool {
+    static func == (lhs: PlantTask, rhs: PlantTask) -> Bool {
         lhs.id == rhs.id
     }
     

@@ -24,11 +24,11 @@ struct PlantType {
     // let size: PlantAverageSize
 }
 
-struct Plant {
-    var name: String
-    var plantType: PlantType
-    var place: Room
-    var purchaseDay: Date
-    var wateringSpan: Int
-    var image: UIImage?
-}
+//struct Plant {
+//    var name: String
+//    var plantType: PlantType
+//    var place: Room
+//    var purchaseDay: Date
+//    var wateringSpan: Int
+//    var image: UIImage?
+//}

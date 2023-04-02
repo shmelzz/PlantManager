@@ -5,65 +5,98 @@
 //  Created by Elizaveta Shelemekh on 30.03.2023.
 //
 
-import FirebaseDatabase
+import Firebase
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
+
+private enum DocumentError: Error {
+    case notFound
+}
 
 final class DatabaseManager {
     
     static let shared = DatabaseManager()
-    private let database = Database.database()
+    let database = Firestore.firestore()
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
     init() {
-        // database.isPersistenceEnabled = true
+        let settings = FirestoreSettings()
+        settings.isPersistenceEnabled = true
+        settings.cacheSizeBytes = FirestoreCacheSizeUnlimited
+        database.settings = settings
     }
     
-    func postPlant(user id: String, plant: PlantSpec) {
+    func getOne<T: Decodable>(of type: T.Type, with query: Query) async -> Result<T, Error> {
         do {
-            let data = try encoder.encode(plant)
-            let json = try JSONSerialization.jsonObject(with: data)
-            database.reference(withPath: "users/\(id)/plants").childByAutoId().setValue(json)
-        } catch {
-            print("an error occurred", error)
+            let querySnapshot = try await query.getDocuments()
+            if let document = querySnapshot.documents.first {
+                let data = try document.data(as: T.self)
+                return .success(data)
+            } else {
+                print("Warning: \(#function) document not found")
+                return .failure(DocumentError.notFound)
+            }
+        } catch let error {
+            print("Error: \(#function) couldn't access snapshot, \(error)")
+            return .failure(error)
         }
     }
     
-    func getPlants(user id: String) {
-        
-        //        do {
-        //            let data = try encoder.encode(plant)
-        //            let json = try JSONSerialization.jsonObject(with: data)
-        //            database.reference(withPath: "users/\(id)/plants").childByAutoId().setValue(json)
-        //        } catch {
-        //            print("an error occurred", error)
-        //        }
-        var plants: [PlantSpec] = []
-        
-        database.reference(withPath: "users/\(id)/plants").getData { data, error in
+    func getMany<T: Decodable>(of type: T.Type,with query: Query) async -> Result<[T], Error> {
+        do {
+            var response: [T] = []
+            let querySnapshot = try await query.getDocuments()
             
-            
+            for document in querySnapshot.documents {
+                do {
+                    let data = try document.data(as: T.self)
+                    response.append(data)
+                } catch let error {
+                    print("Error: \(#function) document(s) not decoded from data, \(error)")
+                    return .failure(error)
+                }
+            }
+            return .success(response)
+        } catch let error {
+            print("Error: couldn't access snapshot, \(error)")
+            return .failure(error)
         }
-            //.observeSingleEvent(of: .value, with: { [weak self] snapshot in
-//            for child in snapshot.children {
-//                guard
-//                    let self = self,
-//                    var json = child. as? [String: Any]
-//                else {
-//                    return
-//                }
-//
-//                json["id"] = snapshot.key
-//
-//                do {
-//                    let data = try JSONSerialization.data(withJSONObject: json)
-//                    let thought = try self.decoder.decode(PlantSpec.self, from: data)
-//                    plants.append(thought)
-//                } catch {
-//                    print("an error occurred", error)
-//                }
-//            }
-//        }){ error in
-//            print(error.localizedDescription)
-//        }
+    }
+    
+    func post<T: FirebaseIdentifiable>(_ value: T, to collection: String) async -> Result<T, Error> {
+        let ref = database.collection(collection).document()
+        var valueToWrite: T = value
+        valueToWrite.id = ref.documentID
+        do {
+            try ref.setData(from: valueToWrite)
+            return .success(valueToWrite)
+        } catch let error {
+            print("Error: \(#function) in collection: \(collection), \(error)")
+            return .failure(error)
+        }
+    }
+    
+    func put<T: FirebaseIdentifiable>(_ value: T, to collection: String) async -> Result<T, Error> {
+        let ref = database.collection(collection).document(value.id)
+        do {
+            try ref.setData(from: value)
+            return .success(value)
+        } catch let error {
+            print("Error: \(#function) in \(collection) for id: \(value.id), \(error)")
+            return .failure(error)
+        }
+    }
+    
+    func delete<T: FirebaseIdentifiable>(_ value: T, in collection: String) async -> Result<Void, Error> {
+        let ref = database.collection(collection).document(value.id)
+        do {
+            try await ref.delete()
+            return .success(())
+        } catch let error {
+            print("Error: \(#function) in \(collection) for id: \(value.id), \(error)")
+            return .failure(error)
+        }
     }
 }
