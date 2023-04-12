@@ -28,6 +28,8 @@ final class AddTaskViewController: UIViewController {
         return datePicker
     }()
     
+    var delegate: PlantCareView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -89,6 +91,7 @@ final class AddTaskViewController: UIViewController {
                 print(error)
             }
         }
+        delegate?.loadTasks()
         dismiss(animated: true)
     }
 }

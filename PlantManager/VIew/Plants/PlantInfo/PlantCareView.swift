@@ -85,6 +85,7 @@ final class PlantCareView: UIView {
     private func addTaskButtonPressed() {
         let addTaskViewController = AddTaskViewController()
         addTaskViewController.plant = actionControllerPresenter?.plant
+        addTaskViewController.delegate = self
         let nav = UINavigationController(rootViewController: addTaskViewController)
         if let sheetController = nav.sheetPresentationController {
             sheetController.detents = [.medium(), .large()]
@@ -94,7 +95,7 @@ final class PlantCareView: UIView {
         actionControllerPresenter?.present(nav, animated: true)
     }
     
-    private func loadTasks() {
+    func loadTasks() {
         Task {
             do {
                 let tasks = await TaskManager.loadTasks(forPlant: actionControllerPresenter?.plant?.id ?? "")

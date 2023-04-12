@@ -218,5 +218,7 @@ extension AddPlantViewController: ImagePickerDelegate {
     
     func didSelect(image: UIImage?) {
         plantImage.image = image
+        
+        
     }
 }
